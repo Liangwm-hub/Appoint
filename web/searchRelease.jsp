@@ -61,7 +61,6 @@
         <th>见面时间</th>
         <th>见面地点</th>
         <th>操作</th>
-        <th>上传图片</th>
     <tr/>
 
     <%
@@ -88,13 +87,10 @@
         <td><%=u.getPlace()%>
         </td>
         <td>
-            <a href="AppointServlet?id=<%=u.getId()%>&appointTime=<%=u.getAppointTime()%>&place=<%=u.getPlace()%>">点击预约</a>
-        </td>
-        <td>
-            <form action="UploadPictureServlet?id=<%=u.getId()%>&appointTime=<%=u.getAppointTime()%>&place=<%=u.getPlace()%>"
+            <form action="AppointServlet?id=<%=u.getId()%>&appointTime=<%=u.getAppointTime()%>&place=<%=u.getPlace()%>"
                   method="post" enctype="multipart/form-data">
                 <input type="file" name="picture">
-                <input type="submit" value="上       传">
+                <input type="submit" value="预       约">
             </form>
         </td>
     </tr>

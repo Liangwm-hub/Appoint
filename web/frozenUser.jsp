@@ -42,7 +42,6 @@
         <tr>
             <th>学生学号</th>
             <th>学生姓名</th>
-            <th>注册状态</th>
             <th>操作</th>
         <tr/>
 
@@ -58,8 +57,6 @@
             <td><%=u.getSno()%>
             </td>
             <td><%=u.getName()%>
-            </td>
-            <td><%=u.getStatus()%>
             </td>
             <td><a href="UnsealUserServlet?sno=<%=u.getSno()%>">解封</a>
             </td>
@@ -79,10 +76,6 @@
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
-
-        <%--        <c:forEach begin="1" end="${pb.totalPage}" var="i">--%>
-        <%--            <li><a href="#">${i}</a></li>--%>
-        <%--        </c:forEach>--%>
 
         <%
             for (int i = 1; i <= pb.getTotalPage(); i++) {
