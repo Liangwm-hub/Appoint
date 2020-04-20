@@ -4,11 +4,17 @@ package com.liangweimin.www.po;
  * @author 梁伟民
  */
 public class Teacher {
+    /**教师编号*/
     private int id;
+    /**名字*/
     private String name;
+    /**密码*/
     private String password;
+    /**性别*/
     private String sex;
+    /**学院*/
     private String college;
+    /**电话*/
     private String phone;
     /**预约范围*/
     private int scope;

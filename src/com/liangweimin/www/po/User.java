@@ -4,12 +4,19 @@ package com.liangweimin.www.po;
  * @author 梁伟民
  */
 public class User {
+    /**学号*/
     private int sno;
+    /**名字*/
     private String name;
+    /**密码*/
     private String password;
+    /**性别*/
     private String sex;
+    /**专业班级*/
     private String majorClass;
+    /**电话*/
     private String phone;
+    /**账号状态*/
     private String status;
 
     public User() {
