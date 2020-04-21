@@ -27,4 +27,4 @@
 >
 >  **github仓库**: https://github.com/Liangwm-hub/Appoint.git
 >
->  备注:(由于我时常登陆不上github,也不是很会用git,github里的文件可能会和邮件的文件有些(bug)区别,邮件里的工程文件是最新的,请见谅)
+
