@@ -1,4 +1,4 @@
-package com.liangweimin.www.view.manager;
+package com.liangweimin.www.view.teacher;
 
 import com.liangweimin.www.service.TeacherService;
 
