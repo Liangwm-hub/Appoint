@@ -4,7 +4,6 @@ import com.liangweimin.www.bean.PageBean;
 import com.liangweimin.www.dao.ManagerDao;
 import com.liangweimin.www.dao.TeacherDao;
 import com.liangweimin.www.po.*;
-import com.liangweimin.www.service.impl.IManagerService;
 
 import java.util.List;
 

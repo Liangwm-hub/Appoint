@@ -1,6 +1,5 @@
 package com.liangweimin.www.dao;
 
-import com.liangweimin.www.dao.impl.IUserDao;
 import com.liangweimin.www.po.*;
 import com.liangweimin.www.util.JDBCUtil;
 import org.springframework.jdbc.core.JdbcTemplate;

@@ -1,6 +1,5 @@
 package com.liangweimin.www.dao;
 
-import com.liangweimin.www.dao.impl.IManagerDao;
 import com.liangweimin.www.po.*;
 import com.liangweimin.www.util.JDBCUtil;
 
