@@ -30,6 +30,7 @@
     <li role="presentation" class="active"><a href="#"><font color="black" size="4em">出行计划</font></a></li>
     <li role="presentation"><a href="ProcessRequestServlet"><font color="black" size="4em">处理请求</font></a></li>
     <li role="presentation"><a href="setAppointment.jsp"><font color="black" size="4em">发布预约</font></a></li>
+    <li role="presentation"><a href="FindAllChatByTeacherServlet"><font color="black" size="4em">聊天记录</font></a></li>
     <li role="presentation"><a href="FindAllNoticesByTeacherServlet"><font color="black" size="4em">通知</font></a></li>
 
 </ul>

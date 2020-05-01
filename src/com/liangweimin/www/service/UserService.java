@@ -2,17 +2,14 @@ package com.liangweimin.www.service;
 
 import com.liangweimin.www.bean.PageBean;
 import com.liangweimin.www.dao.UserDao;
-import com.liangweimin.www.po.Appoint;
-import com.liangweimin.www.po.Notice;
-import com.liangweimin.www.po.Release;
-import com.liangweimin.www.po.User;
-import com.liangweimin.www.service.impl.IUserService;
+import com.liangweimin.www.po.*;
 
 import java.util.List;
 
 /**
  * 业务逻辑层:
  * 逻辑性的增删查改,对dao的组装
+ *
  * @author 梁伟民
  */
 public class UserService implements IUserService {
@@ -48,6 +45,7 @@ public class UserService implements IUserService {
 
     /**
      * 用户修改信息
+     *
      * @param sno
      * @param user
      * @return
@@ -77,7 +75,6 @@ public class UserService implements IUserService {
     }
 
 
-
     /**
      * 学生 预约导师
      *
@@ -86,8 +83,8 @@ public class UserService implements IUserService {
      * @return
      */
     @Override
-    public boolean appoint(int sno, String userName, String fileName,Release release) {
-        return userDao.appoint(sno,userName,fileName,release);
+    public boolean appoint(int sno, String userName, String fileName, Release release) {
+        return userDao.appoint(sno, userName, fileName, release);
     }
 
 
@@ -287,4 +284,70 @@ public class UserService implements IUserService {
         return userDao.queryNoticeById(noticeId);
     }
 
+    /**
+     * 学生创建聊天室
+     *
+     * @param chatRoom
+     * @return 布尔值
+     */
+    @Override
+    public boolean createChatRoom(ChatRoom chatRoom) {
+        if (!userDao.chatRoomExist(chatRoom)) {
+            return userDao.createChatRoom(chatRoom);
+        }
+        return false;
+    }
+
+    /**
+     * 返回所有聊天
+     *
+     * @param userSno
+     * @return 含有所有聊天的List集合
+     */
+    @Override
+    public List<ChatRoom> findAllChat(int userSno) {
+        return userDao.findAllChat(userSno);
+    }
+
+
+    /**
+     * 学生发送消息
+     *
+     * @param chatMessage
+     * @return 布尔值
+     */
+    @Override
+    public boolean sendMessage(ChatMessage chatMessage) {
+        return userDao.sendMessage(chatMessage);
+    }
+
+    /**
+     * 查询所有 id>finalMessageId 的聊天消息,即新的聊天消息
+     *
+     * @param finalMessageId
+     * @return 新的聊天消息的List集合
+     */
+    public List<ChatMessage> getNewMessage(int finalMessageId, int chatId) {
+        List<ChatMessage> chatMessages = userDao.getNewMessage(finalMessageId, chatId);
+        return chatMessages;
+    }
+
+    /**
+     * 根据浏览器传入的本地最新消息ID查询是否存在新的聊天记录
+     *
+     * @param finalMessageId
+     * @return 新的聊天记录的数量
+     */
+    public boolean hasNew(String finalMessageId, String chatId) {
+        return userDao.hasNew(finalMessageId, chatId);
+    }
+
+    /**
+     * 删除对应的聊天室和聊天信息
+     * @param chatId
+     * @return 布尔值
+     */
+    public boolean deleteChat(int chatId){
+        return userDao.deleteChat(chatId);
+    }
 }

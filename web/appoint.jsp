@@ -37,8 +37,8 @@
 <ul class="nav nav-tabs">
     <li role="presentation" class="active"><a href="#"><font color="black" size="4em">预约导师</font></a></li>
     <li role="presentation"><a href="MyAppointmentServlet"><font color="black" size="4em">我的预约</font></a></li>
-    <li role="presentation"><a href="QueryUserBySnoServlet?sno=<%=sno%>"><font color="black" size="4em">个人信息</font></a>
-    </li>
+    <li role="presentation"><a href="QueryUserBySnoServlet?sno=<%=sno%>"><font color="black" size="4em">个人信息</font></a></li>
+    <li role="presentation"><a href="FindAllChatByUserServlet?sno=<%=sno%>"><font color="black" size="4em">聊天记录</font></a></li>
     <li role="presentation"><a href="FindAllNoticesByUserServlet"><font color="black" size="4em">通知</font></a></li>
 
 </ul>
@@ -61,6 +61,7 @@
         <th>联系电话</th>
         <th>见面时间</th>
         <th>见面地点</th>
+        <th>私聊</th>
         <th>操作</th>
     <tr/>
 
@@ -86,6 +87,8 @@
         <td><%=u.getAppointTime()%>
         </td>
         <td><%=u.getPlace()%>
+        </td>
+        <td><a href="ChatToTeacherServlet?sno=<%=sno%>&teacherId=<%=u.getId()%>">进入聊天室</a>
         </td>
         <td>
             <form action="AppointServlet?id=<%=u.getId()%>&appointTime=<%=u.getAppointTime()%>&place=<%=u.getPlace()%>"

@@ -1,11 +1,9 @@
 package com.liangweimin.www.dao;
 
 import com.liangweimin.www.dao.impl.ITeacherDao;
-import com.liangweimin.www.po.Appoint;
-import com.liangweimin.www.po.Notice;
-import com.liangweimin.www.po.Release;
-import com.liangweimin.www.po.Teacher;
+import com.liangweimin.www.po.*;
 import com.liangweimin.www.util.JDBCUtil;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,6 +19,8 @@ import java.util.List;
  * @author 梁伟民
  */
 public class TeacherDao implements ITeacherDao {
+
+    private JdbcTemplate template = new JdbcTemplate(JDBCUtil.getDataSource());
 
     /**
      * 通过导师 id 判断用户是否已存在
@@ -661,4 +661,157 @@ public class TeacherDao implements ITeacherDao {
         }
     }
 
+
+    /**
+     * 导师创建聊天室
+     *
+     * @param chatRoom
+     * @return 布尔值
+     */
+    public boolean createChatRoom(ChatRoom chatRoom) {
+        String sql = "insert into `chat_room`(teacher_id,teacher_name,user_sno,user_name) values(?,?,?,?)";
+        int count = template.update(sql, chatRoom.getTeacherId(), chatRoom.getTeacherName(), chatRoom.getUserSno(), chatRoom.getUserName());
+        return count > 0;
+    }
+
+
+    /**
+     * 返回所有聊天
+     *
+     * @param teacherId
+     * @return 含有所有聊天的List集合
+     */
+    public List<ChatRoom> findAllChat(int teacherId) {
+
+        ChatRoom chatRoom = null;
+        List<ChatRoom> list = new ArrayList<>();
+
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = JDBCUtil.getConnection();
+            String sql = "select * from chat_room where teacher_id=? order by chat_id desc";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, teacherId);
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int chatId = rs.getInt("chat_id");
+                int userSno = rs.getInt("user_sno");
+                String teacherName = rs.getString("teacher_name");
+                String userName = rs.getString("user_name");
+
+                chatRoom = new ChatRoom(chatId, teacherId, teacherName, userSno, userName);
+                list.add(chatRoom);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.closeSource(conn, ps, rs);
+        }
+        return list;
+    }
+
+
+    /**
+     * 导师发送消息
+     *
+     * @param chatMessage
+     * @return 布尔值
+     */
+    public boolean sendMessage(ChatMessage chatMessage) {
+        String sql = "insert into chat_message(chat_id,message_content,teacher_name,user_name,sender_identity,create_time) values(?,?,?,?,?,?)";
+        int count = template.update(sql, chatMessage.getChatId(), chatMessage.getMessageContent(), chatMessage.getTeacherName(), chatMessage.getUserName(), chatMessage.getSenderIdentity(), chatMessage.getCreateTime());
+        return count > 0;
+    }
+
+
+    /**
+     * 查询所有 id>finalMessageId 的聊天消息,即新的聊天消息
+     *
+     * @param finalMessageId
+     * @return 新的聊天消息的List集合
+     */
+    public List<ChatMessage> getNewMessage(int finalMessageId, int chatId) {
+
+        ChatMessage chatMessage = null;
+        List<ChatMessage> list = new ArrayList<>();
+
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = JDBCUtil.getConnection();
+            String sql = "select * from chat_message where message_id>? AND chat_id=?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, finalMessageId);
+            ps.setInt(2, chatId);
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int messageId = rs.getInt("message_id");
+                String messageContent = rs.getString("message_content");
+                String teacherName = rs.getString("teacher_name");
+                String userName = rs.getString("user_name");
+                String senderIdentity = rs.getString("sender_identity");
+                String createTime = rs.getString("create_time");
+
+                chatMessage = new ChatMessage(messageId, chatId, messageContent, teacherName, userName, senderIdentity, createTime);
+                list.add(chatMessage);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.closeSource(conn, ps, rs);
+        }
+        return list;
+
+
+    }
+
+
+    /**
+     * 根据浏览器传入的本地最新消息ID查询是否存在新的聊天记录
+     *
+     * @param finalMessageId
+     * @return 新的聊天记录的数量
+     */
+    public boolean hasNew(String finalMessageId, String chatId) {
+        String sql = "SELECT COUNT(*) FROM `chat_message` WHERE `message_id`>? AND `chat_id`=?";
+        Long count = template.queryForObject(sql, long.class, finalMessageId, chatId);
+        return count > 0;
+    }
+
+
+    /**
+     * 判断聊天室是否已存在
+     *
+     * @param chatRoom
+     * @return 布尔值
+     */
+    public boolean chatRoomExist(ChatRoom chatRoom) {
+        String sql = "select count(*) from chat_room where teacher_id=? and user_sno=?";
+        Integer count = template.queryForObject(sql, int.class, chatRoom.getTeacherId(), chatRoom.getUserSno());
+        return count > 0;
+    }
+
+    /**
+     * 删除对应的聊天室和聊天信息
+     *
+     * @param chatId
+     * @return 布尔值
+     */
+    public boolean deleteChat(int chatId) {
+
+        String sql1 = "delete from chat_room where chat_id=?";
+        String sql2 = "delete from chat_message where chat_id=?";
+
+        int count1 = template.update(sql1, chatId);
+        int count2 = template.update(sql2, chatId);
+
+        return count1 > 0;
+    }
 }

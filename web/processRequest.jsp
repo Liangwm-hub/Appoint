@@ -54,8 +54,8 @@
     <li role="presentation"><a href="FindReleaseByPageServlet"><font color="black" size="4em">出行计划</font></a></li>
     <li role="presentation" class="active"><a href="#"><font color="black" size="4em">处理请求</font></a></li>
     <li role="presentation"><a href="setAppointment.jsp"><font color="black" size="4em">发布预约</font></a></li>
-    <li role="presentation"><a href="FindAllNoticesByTeacherServlet"><font color="black"
-                                                                                          size="4em">通知</font></a></li>
+    <li role="presentation"><a href="FindAllChatByTeacherServlet"><font color="black" size="4em">聊天记录</font></a></li>
+    <li role="presentation"><a href="FindAllNoticesByTeacherServlet"><font color="black" size="4em">通知</font></a></li>
 
 </ul>
 <br>
@@ -76,6 +76,7 @@
             <th>见面时间</th>
             <th>见面地点</th>
             <th>图片</th>
+            <th>私聊</th>
             <th>操作</th>
             <th>操作</th>
         <tr/>
@@ -100,6 +101,8 @@
             <td><%=u.getPlace()%>
             </td>
             <td><a href="DownloadPictureServlet?num=<%=u.getNum()%>">查看图片</a>
+            </td>
+            <td><a href="ChatToUserServlet?userSno=<%=u.getSno()%>&teacherId=<%=u.getId()%>">进入聊天室</a>
             </td>
             <td><a href="ProcessSelectedServlet?num=<%=u.getNum()%>">批准</a>
             </td>

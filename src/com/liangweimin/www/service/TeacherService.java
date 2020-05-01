@@ -2,11 +2,7 @@ package com.liangweimin.www.service;
 
 import com.liangweimin.www.bean.PageBean;
 import com.liangweimin.www.dao.TeacherDao;
-import com.liangweimin.www.po.Appoint;
-import com.liangweimin.www.po.Notice;
-import com.liangweimin.www.po.Release;
-import com.liangweimin.www.po.Teacher;
-import com.liangweimin.www.service.impl.ITeacherService;
+import com.liangweimin.www.po.*;
 
 import java.util.List;
 
@@ -296,5 +292,70 @@ public class TeacherService implements ITeacherService {
     @Override
     public Notice queryNoticeById(int noticeId) {
         return teacherDao.queryNoticeById(noticeId);
+    }
+
+
+    /**
+     * 学生创建聊天室
+     *
+     * @param chatRoom
+     * @return 布尔值
+     */
+    public boolean createChatRoom(ChatRoom chatRoom) {
+        if (!teacherDao.chatRoomExist(chatRoom)) {
+            return teacherDao.createChatRoom(chatRoom);
+        }
+        return false;
+    }
+
+    /**
+     * 返回所有聊天
+     *
+     * @param teacherId
+     * @return 含有所有聊天的List集合
+     */
+    public List<ChatRoom> findAllChat(int teacherId) {
+        return teacherDao.findAllChat(teacherId);
+    }
+
+
+    /**
+     * 学生发送消息
+     *
+     * @param chatMessage
+     * @return 布尔值
+     */
+    public boolean sendMessage(ChatMessage chatMessage) {
+        return teacherDao.sendMessage(chatMessage);
+    }
+
+    /**
+     * 查询所有 id>finalMessageId 的聊天消息,即新的聊天消息
+     *
+     * @param finalMessageId
+     * @return 新的聊天消息的List集合
+     */
+    public List<ChatMessage> getNewMessage(int finalMessageId, int chatId) {
+        List<ChatMessage> chatMessages = teacherDao.getNewMessage(finalMessageId, chatId);
+        return chatMessages;
+    }
+
+    /**
+     * 根据浏览器传入的本地最新消息ID查询是否存在新的聊天记录
+     *
+     * @param finalMessageId
+     * @return 新的聊天记录的数量
+     */
+    public boolean hasNew(String finalMessageId, String chatId) {
+        return teacherDao.hasNew(finalMessageId, chatId);
+    }
+
+    /**
+     * 删除对应的聊天室和聊天信息
+     * @param chatId
+     * @return 布尔值
+     */
+    public boolean deleteChat(int chatId){
+        return teacherDao.deleteChat(chatId);
     }
 }

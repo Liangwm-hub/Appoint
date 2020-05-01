@@ -38,8 +38,8 @@
 <ul class="nav nav-tabs">
     <li role="presentation"><a href="FindReleaseByUserServlet"><font color="black" size="4em">预约导师</font></a></li>
     <li role="presentation" class="active"><a href="#"><font color="black" size="4em">我的预约</font></a></li>
-    <li role="presentation"><a href="QueryUserBySnoServlet?sno=<%=sno%>"><font color="black" size="4em">个人信息</font></a>
-    </li>
+    <li role="presentation"><a href="QueryUserBySnoServlet?sno=<%=sno%>"><font color="black" size="4em">个人信息</font></a></li>
+    <li role="presentation"><a href="FindAllChatByUserServlet?sno=<%=sno%>"><font color="black" size="4em">聊天记录</font></a></li>
     <li role="presentation"><a href="FindAllNoticesByUserServlet"><font color="black" size="4em">通知</font></a></li>
 
 </ul>

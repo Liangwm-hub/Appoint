@@ -23,5 +23,24 @@
     <orderEntry type="library" name="mysql-connector-java-8.0.11 (13)" level="project" />
     <orderEntry type="library" name="commons-fileupload-1.3.1" level="project" />
     <orderEntry type="library" name="commons-io-2.4" level="project" />
+    <orderEntry type="module-library">
+      <library name="druid-1.0.9">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/web/WEB-INF/lib/druid-1.0.9.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="jstl (3)" level="project" />
+    <orderEntry type="library" name="standard (3)" level="project" />
+    <orderEntry type="library" name="commons-logging-1.2 (3)" level="project" />
+    <orderEntry type="library" name="spring-beans-5.1.10.RELEASE (2)" level="project" />
+    <orderEntry type="library" name="spring-core-5.1.10.RELEASE (2)" level="project" />
+    <orderEntry type="library" name="spring-jdbc-5.1.10.RELEASE (2)" level="project" />
+    <orderEntry type="library" name="spring-tx-5.1.10.RELEASE (2)" level="project" />
+    <orderEntry type="library" name="jackson-annotations-2.9.0" level="project" />
+    <orderEntry type="library" name="jackson-core-2.9.8" level="project" />
+    <orderEntry type="library" name="jackson-databind-2.9.8" level="project" />
   </component>
 </module>
