@@ -26,7 +26,7 @@ public class QueryUserBySnoServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
 
         //获得sno
-        int sno = Integer.parseInt(request.getParameter("sno"));
+        int sno = (int) request.getSession().getAttribute("sno");
 
         //获得对应学号的 User对象
         UserService userService = new UserService();

@@ -11,22 +11,44 @@
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>index</title>
 
+    <base href="http://${pageContext.request.serverName }:${pageContext.request.serverPort }${pageContext.request.contextPath }/"/>
     <!-- Bootstrap -->
     <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 
+    <style type="text/css">
+        td, th {
+            text-align: center;
+        }
+    </style>
 
 </head>
 <body>
 
+<div style="float: left">
+    <img src="${pageContext.request.contextPath}/img/GDUT.gif">
+</div>
 <%--导航条--%>
-<ul class="nav nav-tabs">
-    <li role="presentation"><a href="FindReleaseByPageServlet"><font color="black" size="4em">出行计划</font></a></li>
-    <li role="presentation"><a href="ProcessRequestServlet"><font color="black" size="4em">处理请求</font></a></li>
-    <li role="presentation"><a href="${pageContext.request.contextPath}/setAppointment.jsp"><font color="black" size="4em">发布预约</font></a></li>
-    <li role="presentation" class="active"><a href="FindAllChatByTeacherServlet"><font color="black" size="4em">聊天记录</font></a></li>
-    <li role="presentation"><a href="FindAllNoticesByTeacherServlet"><font color="black" size="4em">通知</font></a></li>
-
+<ul class="nav nav-tabs" style="font-size: 23px;">
+    <li>
+        <a href="FindReleaseByPageServlet">出行计划</a>
+    </li>
+    <li>
+        <a href="ProcessRequestServlet">处理请求</a>
+    </li>
+    <li>
+        <a href="setAppointment.jsp">发布预约</a>
+    </li>
+    <li class="active">
+        <a href="FindAllChatByTeacherServlet">聊天记录</a>
+    </li>
+    <li>
+        <a href="FindAllNoticesByTeacherServlet">通知</a>
+    </li>
+    <div align="right">
+        <h5>会面预约系统(教师端)</h5>
+    </div>
 </ul>
+
 
 <br>
 
@@ -34,14 +56,17 @@
     <tr class="success">
         <th>聊天列表</th>
         <th>操作</th>
-        <th>操作</th>
     </tr>
 
     <c:forEach items="${requestScope.chatRooms}" var="chatRoom">
         <tr>
             <td>${chatRoom.userName}</td>
-            <td><a href="${pageContext.request.contextPath}/view/teacher/chat.jsp?chatId=${chatRoom.chatId}&userName=${chatRoom.userName}&teacherName=${chatRoom.teacherName}">进入聊天室</a> </td>
-            <td><a href="DeleteChatByTeacherServlet?chatId=${chatRoom.chatId}&teacherId=${chatRoom.teacherId}">删除聊天记录</a></td>
+            <td>
+                <a href="${pageContext.request.contextPath}/view/teacher/chat.jsp?chatId=${chatRoom.chatId}&userName=${chatRoom.userName}&teacherName=${chatRoom.teacherName}"
+                   class="btn btn-primary">进入聊天室</a>
+                <a href="DeleteChatByTeacherServlet?chatId=${chatRoom.chatId}&teacherId=${chatRoom.teacherId}"
+                   class="btn btn-danger">删除聊天记录</a>
+            </td>
         </tr>
     </c:forEach>
 

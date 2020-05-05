@@ -35,31 +35,38 @@ public class UserDao implements IUserDao {
      */
     @Override
     public boolean login(User user) {
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        try {
-            conn = JDBCUtil.getConnection();
-            System.out.println("############");
-            System.out.println(conn);
-            String sql = "select * from user where sno=? and password=? and status='注册成功'";
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, user.getSno());
-            ps.setString(2, user.getPassword());
-
-            //返回一个结果集
-            rs = ps.executeQuery();
-
-            if (rs.next()) {
-                return true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        } finally {
-            JDBCUtil.closeSource(conn, ps, rs);
-        }
-        return false;
+//        Connection conn = null;
+//        PreparedStatement ps = null;
+//        ResultSet rs = null;
+//        try {
+//            conn = JDBCUtil.getConnection();
+//            System.out.println("############");
+//            System.out.println(conn);
+//            String sql = "select * from user where sno=? and password=? and status='注册成功'";
+//            ps = conn.prepareStatement(sql);
+//            ps.setInt(1, user.getSno());
+//            ps.setString(2, user.getPassword());
+//
+//            //返回一个结果集
+//            rs = ps.executeQuery();
+//
+//            if (rs.next()) {
+//                return true;
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return false;
+//        } finally {
+//            JDBCUtil.closeSource(conn, ps, rs);
+//        }
+//        return false;
+        System.out.println("%%%%%%%%%");
+        System.out.println(user.getSno());
+        System.out.println(user.getPassword());
+        String sql = "select count(*) from user where sno=? and password=? and status=?";
+        Integer count = template.queryForObject(sql, int.class, user.getSno(), user.getPassword(), "注册成功");
+        System.out.println(count);
+        return count>0;
     }
 
     /**
@@ -94,6 +101,19 @@ public class UserDao implements IUserDao {
         } finally {
             JDBCUtil.closeSource(conn, ps, rs);
         }
+    }
+
+    /**
+     * 用户修改密码
+     *
+     * @param user
+     * @return
+     */
+    @Override
+    public boolean setPassword(User user) {
+        String sql = "update `user` set `password`=? where `sno`=?";
+        int count = template.update(sql, user.getPassword(), user.getSno());
+        return count > 0;
     }
 
     /**
@@ -746,6 +766,7 @@ public class UserDao implements IUserDao {
      * @param finalMessageId
      * @return 新的聊天消息的List集合
      */
+    @Override
     public List<ChatMessage> getNewMessage(int finalMessageId, int chatId) {
 
         ChatMessage chatMessage = null;
@@ -791,6 +812,7 @@ public class UserDao implements IUserDao {
      * @param finalMessageId
      * @return 新的聊天记录的数量
      */
+    @Override
     public boolean hasNew(String finalMessageId, String chatId) {
         String sql = "SELECT COUNT(*) FROM `chat_message` WHERE `message_id`>? AND `chat_id`=?";
         Long count = template.queryForObject(sql, long.class, finalMessageId, chatId);
@@ -804,6 +826,7 @@ public class UserDao implements IUserDao {
      * @param chatRoom
      * @return 布尔值
      */
+    @Override
     public boolean chatRoomExist(ChatRoom chatRoom) {
         String sql = "select count(*) from chat_room where teacher_id=? and user_sno=?";
         Integer count = template.queryForObject(sql, int.class, chatRoom.getTeacherId(), chatRoom.getUserSno());
@@ -816,6 +839,7 @@ public class UserDao implements IUserDao {
      * @param chatId
      * @return 布尔值
      */
+    @Override
     public boolean deleteChat(int chatId) {
 
         String sql1 = "delete from chat_room where chat_id=?";
@@ -824,6 +848,6 @@ public class UserDao implements IUserDao {
         int count1 = template.update(sql1, chatId);
         int count2 = template.update(sql2, chatId);
 
-        return count1 > 0 ;
+        return count1 > 0;
     }
 }

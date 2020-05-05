@@ -37,7 +37,7 @@ public class DownloadPictureServlet extends HttpServlet {
         String fileName = teacherService.downloadPicture(num);
 
         //有图片的情况
-        if (fileName != null && !"".equals(fileName)) {
+        if (fileName != null && !"".equals(fileName)  && !("null".equals(fileName))) {
 
             //下载文件:需要设置消息头
             //类型为二进制文件类型(任意文件)

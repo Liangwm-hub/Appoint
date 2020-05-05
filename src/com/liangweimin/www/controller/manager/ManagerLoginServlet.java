@@ -2,6 +2,7 @@ package com.liangweimin.www.controller.manager;
 
 import com.liangweimin.www.po.Manager;
 import com.liangweimin.www.service.ManagerService;
+import com.liangweimin.www.util.Md5Util;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,9 +39,11 @@ public class ManagerLoginServlet extends HttpServlet {
             //获得数据
             int managerId = Integer.parseInt(request.getParameter("managerId"));
             String password = request.getParameter("password");
+            //将密码进行加密
+            String encrypt = Md5Util.md5Encrypt(password);
 
             //封装
-            Manager manager = new Manager(managerId, password);
+            Manager manager = new Manager(managerId, encrypt);
 
             //调用service层的方法
             ManagerService managerService = new ManagerService();

@@ -2,6 +2,7 @@ package com.liangweimin.www.controller.teacher;
 
 import com.liangweimin.www.po.Teacher;
 import com.liangweimin.www.service.TeacherService;
+import com.liangweimin.www.util.Md5Util;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,9 +38,11 @@ public class TeacherLoginServlet extends HttpServlet {
             //获得数据
             int id = Integer.parseInt(request.getParameter("id"));
             String password = request.getParameter("password");
+            //将密码进行加密
+            String encrypt = Md5Util.md5Encrypt(password);
 
             //封装
-            Teacher teacher = new Teacher(id, password);
+            Teacher teacher = new Teacher(id, encrypt);
 
             //调用service层的方法
             TeacherService teacherService = new TeacherService();

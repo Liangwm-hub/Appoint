@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @author 梁伟民
  */
-public interface IManagerDao {
+public interface  IManagerDao {
     /**
      * 管理员登录
      *

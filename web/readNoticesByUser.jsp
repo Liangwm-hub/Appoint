@@ -19,26 +19,45 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
+    <style type="text/css">
+        td,th{
+            text-align: center;
+        }
+    </style>
 
 </head>
 <body>
 
-<%
-    int sno = (int) session.getAttribute("sno");
-%>
 
+<div style="float: left">
+    <img src="${pageContext.request.contextPath}/img/GDUT.gif" >
+</div>
 <%--导航条--%>
-<ul class="nav nav-tabs">
-    <li role="presentation"><a href="FindReleaseByUserServlet"><font color="black" size="4em">预约导师</font></a></li>
-    <li role="presentation"><a href="MyAppointmentServlet"><font color="black" size="4em">我的预约</font></a></li>
-    <li role="presentation"><a href="QueryUserBySnoServlet?sno=<%=sno%>"><font color="black" size="4em">个人信息</font></a></li>
-    <li role="presentation"><a href="FindAllChatByUserServlet?sno=<%=sno%>"><font color="black" size="4em">聊天记录</font></a></li>
-    <li role="presentation" class="active"><a href="FindAllNoticesByUserServlet"><font color="black" size="4em">通知</font></a></li>
+<ul class="nav nav-tabs" style="font-size: 23px;" >
+    <li>
+        <a href="FindReleaseByUserServlet">预约导师</a>
+    </li>
+    <li>
+        <a href="MyAppointmentServlet">我的预约</a>
+    </li>
+    <li>
+        <a href="QueryUserBySnoServlet">个人信息</a>
+    </li>
+    <li>
+        <a href="FindAllChatByUserServlet">聊天记录</a>
+    </li>
+    <li class="active">
+        <a href="FindAllNoticesByUserServlet">通知</a>
+    </li>
 </ul>
 
 <br>
 
-<table border="1" class="table table-hover">
+<table class="table table-bordered table-hover">
+    <tr class="success">
+        <th>通知列表</th>
+        <th>操作</th>
+    </tr>
     <%
         List<Notice> list = (List<Notice>) request.getAttribute("notices");
         if (list != null) {
@@ -50,6 +69,9 @@
             <a href="QueryNoticeByUserServlet?noticeId=<%=notice.getNoticeId()%>">
                 <h4><%=notice.getNoticeTitle()%>
                 </h4></a>
+        </td>
+        <td>
+            <a href="QueryNoticeByUserServlet?noticeId=<%=notice.getNoticeId()%>" class="btn btn-primary">查看详情</a>
         </td>
     </tr>
     <%

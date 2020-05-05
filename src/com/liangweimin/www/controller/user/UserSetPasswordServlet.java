@@ -13,13 +13,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * 学生注册
- *
  * @author 梁伟民
  */
-@WebServlet(name = "UserRegisterServlet", urlPatterns = "/UserRegisterServlet")
-public class UserRegisterServlet extends HttpServlet {
-
+@WebServlet(name = "UserSetPasswordServlet", urlPatterns = "/UserSetPasswordServlet")
+public class UserSetPasswordServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
@@ -44,33 +41,32 @@ public class UserRegisterServlet extends HttpServlet {
 
             //获得数据
             int sno = Integer.parseInt(request.getParameter("sno"));
-            String name = request.getParameter("name");
             String password1 = request.getParameter("password1");
             String password2 = request.getParameter("password2");
 
-            if (name != null && password1 != null && password1.equals(password2)) {
+            if (password1 != null && password1.equals(password2)) {
 
                 //将密码进行加密
                 String encrypt = Md5Util.md5Encrypt(password1);
                 //封装
-                User user = new User(sno, name, encrypt);
+                User user = new User(sno,encrypt);
 
                 //调用service层的方法
                 UserService userService = new UserService();
-                boolean success = userService.userRegister(user);
+                boolean success = userService.setPassword(user);
 
                 //注册请求成功
                 if (success) {
-                    writer.println("注册请求成功，请等待管理员的审核！");
+                    response.sendRedirect("userLogin.jsp");
                 } else {
-                    writer.println("注册失败，请检查您的输入！");
+                    writer.println("修改失败，请检查您的输入！");
                 }
             } else {
-                writer.println("注册失败，请检查您的输入！");
+                writer.println("修改失败，请检查您的输入！");
             }
         } else {
             //验证码不正确
-            writer.println("注册失败，请检查您的验证码！");
+            writer.println("修改失败，请检查您的验证码！");
         }
     }
 }

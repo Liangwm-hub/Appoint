@@ -301,6 +301,7 @@ public class TeacherService implements ITeacherService {
      * @param chatRoom
      * @return 布尔值
      */
+    @Override
     public boolean createChatRoom(ChatRoom chatRoom) {
         if (!teacherDao.chatRoomExist(chatRoom)) {
             return teacherDao.createChatRoom(chatRoom);
@@ -314,6 +315,7 @@ public class TeacherService implements ITeacherService {
      * @param teacherId
      * @return 含有所有聊天的List集合
      */
+    @Override
     public List<ChatRoom> findAllChat(int teacherId) {
         return teacherDao.findAllChat(teacherId);
     }
@@ -325,6 +327,7 @@ public class TeacherService implements ITeacherService {
      * @param chatMessage
      * @return 布尔值
      */
+    @Override
     public boolean sendMessage(ChatMessage chatMessage) {
         return teacherDao.sendMessage(chatMessage);
     }
@@ -335,6 +338,7 @@ public class TeacherService implements ITeacherService {
      * @param finalMessageId
      * @return 新的聊天消息的List集合
      */
+    @Override
     public List<ChatMessage> getNewMessage(int finalMessageId, int chatId) {
         List<ChatMessage> chatMessages = teacherDao.getNewMessage(finalMessageId, chatId);
         return chatMessages;
@@ -346,6 +350,7 @@ public class TeacherService implements ITeacherService {
      * @param finalMessageId
      * @return 新的聊天记录的数量
      */
+    @Override
     public boolean hasNew(String finalMessageId, String chatId) {
         return teacherDao.hasNew(finalMessageId, chatId);
     }
@@ -355,6 +360,7 @@ public class TeacherService implements ITeacherService {
      * @param chatId
      * @return 布尔值
      */
+    @Override
     public boolean deleteChat(int chatId){
         return teacherDao.deleteChat(chatId);
     }

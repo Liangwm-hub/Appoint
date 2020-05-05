@@ -26,6 +26,13 @@ public interface IUserService {
     boolean userRegister(User user);
 
     /**
+     * 用户修改密码
+     * @param user
+     * @return
+     */
+    boolean setPassword(User user);
+
+    /**
      * 用户修改信息
      * @param sno
      * @param user
@@ -131,4 +138,27 @@ public interface IUserService {
      * @return 布尔值
      */
     boolean sendMessage(ChatMessage chatMessage);
+
+    /**
+     * 查询所有 id>finalMessageId 的聊天消息,即新的聊天消息
+     *
+     * @param finalMessageId
+     * @return 新的聊天消息的List集合
+     */
+    List<ChatMessage> getNewMessage(int finalMessageId, int chatId);
+
+    /**
+     * 根据浏览器传入的本地最新消息ID查询是否存在新的聊天记录
+     *
+     * @param finalMessageId
+     * @return 新的聊天记录的数量
+     */
+    boolean hasNew(String finalMessageId, String chatId);
+
+    /**
+     * 删除对应的聊天室和聊天信息
+     * @param chatId
+     * @return 布尔值
+     */
+    boolean deleteChat(int chatId);
 }

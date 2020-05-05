@@ -31,7 +31,7 @@ public class DownloadFileByTeacherServlet extends HttpServlet {
         String fileName = request.getParameter("fileName");
 
         //有文件的情况
-        if (fileName != null && !("".equals(fileName))) {
+        if (fileName != null && !("".equals(fileName) && !("null".equals(fileName)))) {
 
             //下载文件:需要设置消息头
             //类型为二进制文件类型(任意文件)

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%--<%@page isELIgnored="false"%>--%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 <html>
 <head>
     <meta charset="utf-8">
@@ -20,7 +20,7 @@
     </style>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>聊天窗口</title>
+    <title>私聊学生</title>
     <base href="http://${pageContext.request.serverName }:${pageContext.request.serverPort }${pageContext.request.contextPath }/"/>
 
 
@@ -39,7 +39,7 @@
             <%--var userName = <%=request.getParameter("userName")%>;--%>
             var chatId = ${param.chatId};
             var userName = document.getElementById("userName").value;
-            var teacherName = document.getElementById("teacherName").value ;
+            var teacherName = document.getElementById("teacherName").value;
 
             askForNew();
 
@@ -110,17 +110,24 @@
                     //获取聊天消息的内容
                     var messageContent = $.trim(this.value);
 
-                    //使用Ajax技术将聊天消息发送到服务器端
-                    $.post("SendMessageByTeacherServlet", {
-                        "chatId": chatId,
-                        "userName": userName,
-                        "teacherName": teacherName,
-                        "messageContent": messageContent
-                    });
+                    //内容不能为空
+                    var p = new RegExp(/\s+/g);
+                    if (messageContent != null && messageContent !== "" && messageContent !== p) {
+
+                        //使用Ajax技术将聊天消息发送到服务器端
+                        $.post("SendMessageByTeacherServlet", {
+                            "chatId": chatId,
+                            "userName": userName,
+                            "teacherName": teacherName,
+                            "messageContent": messageContent
+                        });
+
+                    } else {
+                        alert("请输入有效信息")
+                    }
 
                     //清空多行文本框
                     $("#txt").val("");
-
                 }
 
             });
@@ -134,13 +141,21 @@
             //给按钮绑定单击事件
             $("#btn").click(function (event) {
 
-                //使用Ajax技术将聊天消息发送到服务器端
-                $.post("SendMessageByTeacherServlet", {
-                    "chatId": chatId,
-                    "userName": userName,
-                    "teacherName": teacherName,
-                    "messageContent": message
-                });
+                //内容不能为空
+                var p = new RegExp(/\s+/g);
+                if (message != null && message !== "" && message !== p) {
+
+                    //使用Ajax技术将聊天消息发送到服务器端
+                    $.post("SendMessageByTeacherServlet", {
+                        "chatId": chatId,
+                        "userName": userName,
+                        "teacherName": teacherName,
+                        "messageContent": message
+                    });
+                } else {
+                    alert("请输入有效信息")
+                }
+
 
                 //清空文本区域的内容
                 $("#txt").val("");

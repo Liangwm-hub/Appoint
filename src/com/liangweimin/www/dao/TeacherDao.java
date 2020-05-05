@@ -667,6 +667,7 @@ public class TeacherDao implements ITeacherDao {
      * @param chatRoom
      * @return 布尔值
      */
+    @Override
     public boolean createChatRoom(ChatRoom chatRoom) {
         String sql = "insert into `chat_room`(teacher_id,teacher_name,user_sno,user_name) values(?,?,?,?)";
         int count = template.update(sql, chatRoom.getTeacherId(), chatRoom.getTeacherName(), chatRoom.getUserSno(), chatRoom.getUserName());
@@ -680,6 +681,7 @@ public class TeacherDao implements ITeacherDao {
      * @param teacherId
      * @return 含有所有聊天的List集合
      */
+    @Override
     public List<ChatRoom> findAllChat(int teacherId) {
 
         ChatRoom chatRoom = null;
@@ -720,6 +722,7 @@ public class TeacherDao implements ITeacherDao {
      * @param chatMessage
      * @return 布尔值
      */
+    @Override
     public boolean sendMessage(ChatMessage chatMessage) {
         String sql = "insert into chat_message(chat_id,message_content,teacher_name,user_name,sender_identity,create_time) values(?,?,?,?,?,?)";
         int count = template.update(sql, chatMessage.getChatId(), chatMessage.getMessageContent(), chatMessage.getTeacherName(), chatMessage.getUserName(), chatMessage.getSenderIdentity(), chatMessage.getCreateTime());
@@ -733,6 +736,7 @@ public class TeacherDao implements ITeacherDao {
      * @param finalMessageId
      * @return 新的聊天消息的List集合
      */
+    @Override
     public List<ChatMessage> getNewMessage(int finalMessageId, int chatId) {
 
         ChatMessage chatMessage = null;
@@ -778,6 +782,7 @@ public class TeacherDao implements ITeacherDao {
      * @param finalMessageId
      * @return 新的聊天记录的数量
      */
+    @Override
     public boolean hasNew(String finalMessageId, String chatId) {
         String sql = "SELECT COUNT(*) FROM `chat_message` WHERE `message_id`>? AND `chat_id`=?";
         Long count = template.queryForObject(sql, long.class, finalMessageId, chatId);
@@ -791,6 +796,7 @@ public class TeacherDao implements ITeacherDao {
      * @param chatRoom
      * @return 布尔值
      */
+    @Override
     public boolean chatRoomExist(ChatRoom chatRoom) {
         String sql = "select count(*) from chat_room where teacher_id=? and user_sno=?";
         Integer count = template.queryForObject(sql, int.class, chatRoom.getTeacherId(), chatRoom.getUserSno());
@@ -803,6 +809,7 @@ public class TeacherDao implements ITeacherDao {
      * @param chatId
      * @return 布尔值
      */
+    @Override
     public boolean deleteChat(int chatId) {
 
         String sql1 = "delete from chat_room where chat_id=?";

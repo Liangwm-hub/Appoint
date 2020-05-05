@@ -15,9 +15,6 @@ import java.io.PrintWriter;
  */
 @WebServlet(name = "AskByUserServlet", urlPatterns = "/AskByUserServlet")
 public class AskByUserServlet extends HttpServlet {
-
-    private static final long serialVersionUID = 1L;
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
@@ -30,9 +27,7 @@ public class AskByUserServlet extends HttpServlet {
         String finalMessageId = request.getParameter("finalMessageId");
         String chatId = request.getParameter("chatId");
 
-        System.out.println(chatId);
-
-        //2.根据finalMessageId查询是否存在最新的聊天记录
+        //2.根据finalMessageId查询是否存在最新的聊天记录(messageId>finalMessageId)
         UserService userService = new UserService();
         boolean hasNew = userService.hasNew(finalMessageId,chatId);
 

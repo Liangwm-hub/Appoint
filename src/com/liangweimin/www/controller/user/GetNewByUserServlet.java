@@ -18,9 +18,6 @@ import java.util.List;
  */
 @WebServlet(name = "GetNewByUserServlet", urlPatterns = "/GetNewByUserServlet")
 public class GetNewByUserServlet extends HttpServlet {
-
-    private static final long serialVersionUID = 1L;
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
@@ -33,7 +30,7 @@ public class GetNewByUserServlet extends HttpServlet {
         int finalMessageId = Integer.parseInt(request.getParameter("finalMessageId"));
         int chatId = Integer.parseInt(request.getParameter("chatId"));
 
-        //2.根据finalMessageId获取新聊天记录内容
+        //2.根据finalMessageId获取新聊天记录内容(messageId>finalMessageId)
         UserService userService = new UserService();
         List<ChatMessage> newMessage = userService.getNewMessage(finalMessageId,chatId);
 

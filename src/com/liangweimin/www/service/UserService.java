@@ -42,6 +42,17 @@ public class UserService implements IUserService {
         return false;
     }
 
+    /**
+     * 用户修改密码
+     *
+     * @param user
+     * @return
+     */
+    @Override
+    public boolean setPassword(User user) {
+        return userDao.setPassword(user);
+    }
+
 
     /**
      * 用户修改信息
@@ -327,6 +338,7 @@ public class UserService implements IUserService {
      * @param finalMessageId
      * @return 新的聊天消息的List集合
      */
+    @Override
     public List<ChatMessage> getNewMessage(int finalMessageId, int chatId) {
         List<ChatMessage> chatMessages = userDao.getNewMessage(finalMessageId, chatId);
         return chatMessages;
@@ -338,6 +350,7 @@ public class UserService implements IUserService {
      * @param finalMessageId
      * @return 新的聊天记录的数量
      */
+    @Override
     public boolean hasNew(String finalMessageId, String chatId) {
         return userDao.hasNew(finalMessageId, chatId);
     }
@@ -347,6 +360,7 @@ public class UserService implements IUserService {
      * @param chatId
      * @return 布尔值
      */
+    @Override
     public boolean deleteChat(int chatId){
         return userDao.deleteChat(chatId);
     }

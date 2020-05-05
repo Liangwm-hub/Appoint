@@ -25,6 +25,13 @@ public interface IUserDao {
     boolean userRegister(User user);
 
     /**
+     * 用户修改密码
+     * @param user
+     * @return
+     */
+    boolean setPassword(User user);
+
+    /**
      * 通过学号判断用户是否已存在
      *
      * @param sno
@@ -164,4 +171,36 @@ public interface IUserDao {
      * @return 布尔值
      */
     boolean sendMessage(ChatMessage chatMessage);
+
+    /**
+     * 查询所有 id>finalMessageId 的聊天消息,即新的聊天消息
+     *
+     * @param finalMessageId
+     * @return 新的聊天消息的List集合
+     */
+    List<ChatMessage> getNewMessage(int finalMessageId, int chatId);
+
+    /**
+     * 根据浏览器传入的本地最新消息ID查询是否存在新的聊天记录
+     *
+     * @param finalMessageId
+     * @return 新的聊天记录的数量
+     */
+    boolean hasNew(String finalMessageId, String chatId);
+
+    /**
+     * 判断聊天室是否已存在
+     *
+     * @param chatRoom
+     * @return 布尔值
+     */
+    boolean chatRoomExist(ChatRoom chatRoom);
+
+    /**
+     * 删除对应的聊天室和聊天信息
+     *
+     * @param chatId
+     * @return 布尔值
+     */
+    boolean deleteChat(int chatId);
 }

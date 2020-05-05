@@ -21,27 +21,30 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <style>
-        body {
-            background: url("img/背景.jpg") no-repeat;
-        }
-    </style>
 
 </head>
 <body>
 
-<%
-    int sno = (int) session.getAttribute("sno");
-%>
-
+<div style="float: left">
+    <img src="${pageContext.request.contextPath}/img/GDUT.gif" >
+</div>
 <%--导航条--%>
-<ul class="nav nav-tabs">
-    <li role="presentation"><a href="FindReleaseByUserServlet"><font color="black" size="4em">预约导师</font></a></li>
-    <li role="presentation" class="active"><a href="#"><font color="black" size="4em">我的预约</font></a></li>
-    <li role="presentation"><a href="QueryUserBySnoServlet?sno=<%=sno%>"><font color="black" size="4em">个人信息</font></a></li>
-    <li role="presentation"><a href="FindAllChatByUserServlet?sno=<%=sno%>"><font color="black" size="4em">聊天记录</font></a></li>
-    <li role="presentation"><a href="FindAllNoticesByUserServlet"><font color="black" size="4em">通知</font></a></li>
-
+<ul class="nav nav-tabs" style="font-size: 23px;" >
+    <li>
+        <a href="FindReleaseByUserServlet">预约导师</a>
+    </li>
+    <li class="active">
+        <a href="MyAppointmentServlet">我的预约</a>
+    </li>
+    <li>
+        <a href="QueryUserBySnoServlet">个人信息</a>
+    </li>
+    <li>
+        <a href="FindAllChatByUserServlet">聊天记录</a>
+    </li>
+    <li>
+        <a href="FindAllNoticesByUserServlet">通知</a>
+    </li>
 </ul>
 
 <h4>您可以看到近30天的预约记录</h4>
