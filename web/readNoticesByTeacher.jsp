@@ -19,14 +19,19 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
+    <style type="text/css">
+        td,th{
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
 <div style="float: left">
-    <img src="${pageContext.request.contextPath}/img/GDUT.gif" >
+    <img src="${pageContext.request.contextPath}/img/GDUT.gif" style="max-height: 200px;max-width: 200px;">
 </div>
 <%--导航条--%>
-<ul class="nav nav-tabs" style="font-size: 23px;" >
+<ul class="nav nav-tabs" style="font-size: 21px;" >
     <li>
         <a href="FindReleaseByPageServlet">出行计划</a>
     </li>
@@ -46,7 +51,11 @@
 
 <br>
 
-<table border="1" class="table table-hover">
+<table class="table table-bordered table-hover">
+    <tr class="success">
+        <th>通知列表</th>
+        <th>操作</th>
+    </tr>
     <%
         List<Notice> list = (List<Notice>) request.getAttribute("notices");
         if (list != null) {
@@ -55,17 +64,21 @@
     %>
     <tr>
         <td>
-            <a href="QueryNoticeByTeacherServlet?noticeId=<%=notice.getNoticeId()%>"><h4><%=notice.getNoticeTitle()%>
-            </h4></a>
+            <a href="QueryNoticeByTeacherServlet?noticeId=<%=notice.getNoticeId()%>">
+                <h4><%=notice.getNoticeTitle()%>
+                </h4></a>
+        </td>
+        <td>
+            <a href="QueryNoticeByTeacherServlet?noticeId=<%=notice.getNoticeId()%>" class="btn btn-primary">查看详情</a>
         </td>
     </tr>
     <%
-
             }
         }
     %>
 
 </table>
+
 
 </body>
 </html>

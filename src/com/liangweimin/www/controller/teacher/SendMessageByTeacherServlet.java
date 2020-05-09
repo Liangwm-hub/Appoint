@@ -45,7 +45,7 @@ public class SendMessageByTeacherServlet extends HttpServlet {
         String senderIdentity = "导师";
 
         //封装
-        ChatMessage chatMessage = new ChatMessage(chatId, messageContent, teacherName, userName, senderIdentity, currentTime);
+        ChatMessage chatMessage = new ChatMessage(chatId, messageContent, "文字", teacherName, userName, senderIdentity, currentTime);
 
         //调用service
         TeacherService teacherService = new TeacherService();

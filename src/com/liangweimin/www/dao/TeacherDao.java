@@ -724,8 +724,8 @@ public class TeacherDao implements ITeacherDao {
      */
     @Override
     public boolean sendMessage(ChatMessage chatMessage) {
-        String sql = "insert into chat_message(chat_id,message_content,teacher_name,user_name,sender_identity,create_time) values(?,?,?,?,?,?)";
-        int count = template.update(sql, chatMessage.getChatId(), chatMessage.getMessageContent(), chatMessage.getTeacherName(), chatMessage.getUserName(), chatMessage.getSenderIdentity(), chatMessage.getCreateTime());
+        String sql = "insert into chat_message(chat_id,message_content,message_type,teacher_name,user_name,sender_identity,create_time) values(?,?,?,?,?,?,?)";
+        int count = template.update(sql, chatMessage.getChatId(), chatMessage.getMessageContent(), chatMessage.getMessageType(), chatMessage.getTeacherName(), chatMessage.getUserName(), chatMessage.getSenderIdentity(), chatMessage.getCreateTime());
         return count > 0;
     }
 
@@ -757,12 +757,13 @@ public class TeacherDao implements ITeacherDao {
             while (rs.next()) {
                 int messageId = rs.getInt("message_id");
                 String messageContent = rs.getString("message_content");
+                String messageType = rs.getString("message_type");
                 String teacherName = rs.getString("teacher_name");
                 String userName = rs.getString("user_name");
                 String senderIdentity = rs.getString("sender_identity");
                 String createTime = rs.getString("create_time");
 
-                chatMessage = new ChatMessage(messageId, chatId, messageContent, teacherName, userName, senderIdentity, createTime);
+                chatMessage = new ChatMessage(messageId, chatId, messageContent, messageType, teacherName, userName, senderIdentity, createTime);
                 list.add(chatMessage);
             }
         } catch (Exception e) {

@@ -11,6 +11,8 @@ public class ChatMessage {
     private int chatId;
     /**信息内容*/
     private String messageContent;
+    /**消息类型*/
+    private String messageType;
     /**导师名字*/
     private String teacherName;
     /**学生名字*/
@@ -20,19 +22,21 @@ public class ChatMessage {
     /**发送的时间*/
     private String createTime;
 
-    public ChatMessage(int chatId, String messageContent, String teacherName, String userName, String senderIdentity, String createTime) {
+    public ChatMessage(int chatId, String messageContent,String messageType, String teacherName, String userName, String senderIdentity, String createTime) {
         this.chatId = chatId;
         this.messageContent = messageContent;
+        this.messageType=messageType;
         this.teacherName = teacherName;
         this.userName = userName;
         this.senderIdentity = senderIdentity;
         this.createTime = createTime;
     }
 
-    public ChatMessage(int messageId, int chatId, String messageContent, String teacherName, String userName, String senderIdentity, String createTime) {
+    public ChatMessage(int messageId, int chatId, String messageContent,String messageType, String teacherName, String userName, String senderIdentity, String createTime) {
         this.messageId = messageId;
         this.chatId = chatId;
         this.messageContent = messageContent;
+        this.messageType=messageType;
         this.teacherName = teacherName;
         this.userName = userName;
         this.senderIdentity = senderIdentity;
@@ -107,5 +111,13 @@ public class ChatMessage {
                 ", senderIdentity='" + senderIdentity + '\'' +
                 ", createTime='" + createTime + '\'' +
                 '}';
+    }
+
+    public String getMessageType() {
+        return messageType;
+    }
+
+    public void setMessageType(String messageType) {
+        this.messageType = messageType;
     }
 }

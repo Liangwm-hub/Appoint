@@ -1,6 +1,7 @@
 package com.liangweimin.www.controller.teacher;
 
 import com.liangweimin.www.service.TeacherService;
+import com.liangweimin.www.util.Constant;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,11 +29,6 @@ public class AppointScopeServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         response.setCharacterEncoding("utf-8");
 
-        //范围最小天数
-        int minScope = 1;
-        //范围最大天数
-        int maxScope = 100;
-
         //获得设置的可预约时间范围
         String scope1 = request.getParameter("scope");
 
@@ -45,7 +41,7 @@ public class AppointScopeServlet extends HttpServlet {
             //转成int类型
             int scope = Integer.parseInt(scope1);
             //必须在1~100之间
-            if (scope >= minScope && scope <= maxScope) {
+            if (scope >= Constant.APPOINT_MIN_SCOPE && scope <= Constant.APPOINT_MAX_SCOPE) {
                 //调用service修改scope
                 TeacherService teacherService = new TeacherService();
                 boolean success = teacherService.updateScope(id, scope);

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * 创建或进入聊天室
  * @author 梁伟民
  */
 @WebServlet(name = "ChatToUserServlet", urlPatterns = "/ChatToUserServlet")

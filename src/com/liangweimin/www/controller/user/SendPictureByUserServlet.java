@@ -1,7 +1,6 @@
 package com.liangweimin.www.controller.user;
 
-import com.liangweimin.www.po.Release;
-import com.liangweimin.www.service.TeacherService;
+import com.liangweimin.www.po.ChatMessage;
 import com.liangweimin.www.service.UserService;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
@@ -13,18 +12,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @author 梁伟民
  */
-@WebServlet(name = "AppointServlet", urlPatterns = "/AppointServlet")
-public class AppointServlet extends HttpServlet {
+@WebServlet(name = "SendPictureByUserServlet", urlPatterns = "/SendPictureByUserServlet")
+public class SendPictureByUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
@@ -36,30 +37,18 @@ public class AppointServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=UTF-8");
 
+        //获得数据
+        int chatId = Integer.parseInt(request.getParameter("chatId"));
+        String userName = request.getParameter("userName");
+        String teacherName = request.getParameter("teacherName");
+
         //三种图片的后缀
         String jpg = "jpg";
         String gif = "gif";
         String png = "png";
 
-        //获得导师的数据
-        int id = Integer.parseInt(request.getParameter("id"));
-        String appointTime = request.getParameter("appointTime");
-        String place = request.getParameter("place");
-
-        //调用service找到发布的预约
-        TeacherService teacherService = new TeacherService();
-        Release release = teacherService.queryRelease(id, appointTime, place);
-
-        //取出session中的sno
-        HttpSession session = request.getSession();
-        int sno = (int) session.getAttribute("sno");
-
-        //找到sno对应学生的名字
-        UserService userService = new UserService();
-        String userName = userService.queryUserBySno(sno).getName();
-
         //文件名
-        String fileName = null;
+        String fileName;
 
         //检查前台的form是否有multipart属性
         boolean isMultipart = ServletFileUpload.isMultipartContent(request);
@@ -104,11 +93,26 @@ public class AppointServlet extends HttpServlet {
                         //动态获取目录
                         String path = request.getServletContext().getRealPath("/upload");
 
+                        //修改文件名为当前时间+随机数,以避免名字重复
+                        String formatDate = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+                        String s = String.valueOf(new Random().nextInt(100000));
+
+                        fileName=formatDate+s+"."+ext;
+
                         //路径和文件名
                         File file = new File(path, fileName);
 
                         //上传
                         item.write(file);
+
+                        //当前时间
+                        String createTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+                        //封装
+                        ChatMessage chatMessage = new ChatMessage(chatId, fileName, "图片", teacherName, userName, "学生", createTime);
+
+                        //调用service
+                        UserService userService = new UserService();
+                        userService.sendMessage(chatMessage);
                     }
                 }
             } catch (Exception e) {
@@ -116,17 +120,5 @@ public class AppointServlet extends HttpServlet {
             }
 
         }
-
-        //调用service预约
-        boolean success = userService.appoint(sno, userName, fileName, release);
-
-        PrintWriter writer = response.getWriter();
-        if (success) {
-            writer.println("请求成功!请等待审核结果.");
-        } else {
-            writer.println("上传失败");
-        }
-
-
     }
 }

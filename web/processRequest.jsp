@@ -21,6 +21,12 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
+    <style>
+        th,td{
+            text-align: center;
+        }
+    </style>
+
     <script>
         window.onload = function () {
             //给批准选中按钮添加单击事件
@@ -50,10 +56,10 @@
 <body>
 
 <div style="float: left">
-    <img src="${pageContext.request.contextPath}/img/GDUT.gif" >
+    <img src="${pageContext.request.contextPath}/img/GDUT.gif" style="max-height: 200px;max-width: 200px;">
 </div>
 <%--导航条--%>
-<ul class="nav nav-tabs" style="font-size: 23px;" >
+<ul class="nav nav-tabs" style="font-size: 21px;" >
     <li>
         <a href="FindReleaseByPageServlet">出行计划</a>
     </li>
@@ -70,19 +76,17 @@
         <a href="FindAllNoticesByTeacherServlet">通知</a>
     </li>
 </ul>
-
 <br>
 
 
-<div style="float: right">
+<div style="float: left">
     <a class="btn btn-primary" href="javascript:void(0);" id="processSelected">批准选中</a>
 </div>
 <br><br>
 
-
 <form id="form" action="ProcessSelectedServlet" method="post">
     <table border="1" class="table table-hover">
-        <tr>
+        <tr class="success">
             <th><input type="checkbox" id="firstCb"></th>
             <th>学号</th>
             <th>学生姓名</th>

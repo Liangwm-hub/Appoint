@@ -20,12 +20,11 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <style>
-        body {
-            background: url("img/背景.jpg") no-repeat;
+    <style type="text/css">
+        td, th {
+            text-align: center;
         }
     </style>
-
 </head>
 <body>
 
@@ -33,18 +32,31 @@
     int sno = (int) session.getAttribute("sno");
 %>
 
+<div style="float: left">
+    <img src="${pageContext.request.contextPath}/img/GDUT.gif" style="max-height: 200px;max-width: 200px;">
+</div>
 <%--导航条--%>
-<ul class="nav nav-tabs">
-    <li role="presentation" class="active"><a href="#"><font color="black" size="4em">预约导师</font></a></li>
-    <li role="presentation"><a href="MyAppointmentServlet"><font color="black" size="4em">我的预约</font></a></li>
-    <li role="presentation"><a href="QueryUserBySnoServlet?sno=<%=sno%>"><font color="black" size="4em">个人信息</font></a>
+<ul class="nav nav-tabs" style="font-size: 21px;">
+    <li class="active">
+        <a href="FindReleaseByUserServlet">预约导师</a>
     </li>
-    <li role="presentation"><a href="FindAllNoticesByUserServlet"><font color="black" size="4em">通知</font></a></li>
+    <li>
+        <a href="MyAppointmentServlet">我的预约</a>
+    </li>
+    <li>
+        <a href="QueryUserBySnoServlet">个人信息</a>
+    </li>
+    <li>
+        <a href="FindAllChatByUserServlet">聊天记录</a>
+    </li>
+    <li>
+        <a href="FindAllNoticesByUserServlet">通知</a>
+    </li>
 </ul>
 
 <br>
 
-<table class="table table-hover" >
+<table class="table table-bordered table-hover">
     <tr>
         <form action="SearchByKeywordsServlet" method="post">
             <input type="text" name="keywords" placeholder="请输入关键字">
@@ -52,7 +64,7 @@
         </form>
     </tr>
     <br>
-    <tr>
+    <tr class="success">
         <th>职工号</th>
         <th>姓名</th>
         <th>性别</th>
@@ -60,6 +72,7 @@
         <th>联系电话</th>
         <th>见面时间</th>
         <th>见面地点</th>
+        <th>私聊</th>
         <th>操作</th>
     <tr/>
 
@@ -86,11 +99,15 @@
         </td>
         <td><%=u.getPlace()%>
         </td>
+        <td><a href="ChatToTeacherServlet?sno=<%=sno%>&teacherId=<%=u.getId()%>">进入聊天室</a>
+        </td>
         <td>
             <form action="AppointServlet?id=<%=u.getId()%>&appointTime=<%=u.getAppointTime()%>&place=<%=u.getPlace()%>"
                   method="post" enctype="multipart/form-data">
-                <input type="file" name="picture">
-                <input type="submit" value="预       约">
+                <div align="left">
+                    <input type="file" name="picture">
+                    <input type="submit" value="预       约">
+                </div>
             </form>
         </td>
     </tr>
@@ -100,6 +117,7 @@
     %>
 
 </table>
+
 <nav aria-label="Page navigation">
     <ul class="pagination">
 

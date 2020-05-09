@@ -23,10 +23,10 @@
 <body>
 
 <div style="float: left">
-    <img src="${pageContext.request.contextPath}/img/GDUT.gif" >
+    <img src="${pageContext.request.contextPath}/img/GDUT.gif" style="max-height: 200px;max-width: 200px;">
 </div>
 <%--导航条--%>
-<ul class="nav nav-tabs" style="font-size: 23px;" >
+<ul class="nav nav-tabs" style="font-size: 21px;" >
     <li>
         <a href="FindReleaseByUserServlet">预约导师</a>
     </li>

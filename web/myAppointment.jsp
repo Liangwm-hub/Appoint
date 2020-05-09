@@ -21,15 +21,20 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
+    <style type="text/css">
+        td, th {
+            text-align: center;
+        }
+    </style>
 
 </head>
 <body>
 
 <div style="float: left">
-    <img src="${pageContext.request.contextPath}/img/GDUT.gif" >
+    <img src="${pageContext.request.contextPath}/img/GDUT.gif" style="max-height: 200px;max-width: 200px;">
 </div>
 <%--导航条--%>
-<ul class="nav nav-tabs" style="font-size: 23px;" >
+<ul class="nav nav-tabs" style="font-size: 21px;" >
     <li>
         <a href="FindReleaseByUserServlet">预约导师</a>
     </li>
@@ -49,8 +54,8 @@
 
 <h4>您可以看到近30天的预约记录</h4>
 
-<table class="table table-hover">
-    <tr>
+<table class="table table-bordered table-hover">
+    <tr  class="success">
         <th>姓名</th>
         <th>所属学院</th>
         <th>联系电话</th>

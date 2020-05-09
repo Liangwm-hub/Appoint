@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
+ * 私聊时询问是否有新的消息
  * @author 梁伟民
  */
 @WebServlet(name = "AskByTeacherServlet", urlPatterns = "/AskByTeacherServlet")

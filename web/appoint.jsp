@@ -20,7 +20,11 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
-
+    <style type="text/css">
+        td, th {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
@@ -29,10 +33,10 @@
 %>
 
 <div style="float: left">
-    <img src="${pageContext.request.contextPath}/img/GDUT.gif" >
+    <img src="${pageContext.request.contextPath}/img/GDUT.gif" style="max-height: 200px;max-width: 200px;">
 </div>
 <%--导航条--%>
-<ul class="nav nav-tabs" style="font-size: 23px;" >
+<ul class="nav nav-tabs" style="font-size: 21px;">
     <li class="active">
         <a href="FindReleaseByUserServlet">预约导师</a>
     </li>
@@ -52,7 +56,7 @@
 
 <br>
 
-<table class="table table-hover">
+<table class="table table-bordered table-hover">
     <tr>
         <form action="SearchByKeywordsServlet" method="post">
             <input type="text" name="keywords" placeholder="请输入关键字">
@@ -60,7 +64,7 @@
         </form>
     </tr>
     <br>
-    <tr>
+    <tr class="success">
         <th>职工号</th>
         <th>姓名</th>
         <th>性别</th>
@@ -100,8 +104,10 @@
         <td>
             <form action="AppointServlet?id=<%=u.getId()%>&appointTime=<%=u.getAppointTime()%>&place=<%=u.getPlace()%>"
                   method="post" enctype="multipart/form-data">
-                <input type="file" name="picture">
-                <input type="submit" value="预       约">
+                <div align="left">
+                    <input type="file" name="picture">
+                    <input type="submit" value="预       约" >
+                </div>
             </form>
         </td>
     </tr>
@@ -146,6 +152,7 @@
         </span>
     </ul>
 </nav>
+
 
 
 </body>

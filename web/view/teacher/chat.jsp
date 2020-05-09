@@ -10,6 +10,8 @@
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>index</title>
 
+    <base href="http://${pageContext.request.serverName }:${pageContext.request.serverPort }${pageContext.request.contextPath }/"/>
+
     <!-- Bootstrap -->
     <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 
@@ -21,7 +23,6 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>私聊学生</title>
-    <base href="http://${pageContext.request.serverName }:${pageContext.request.serverPort }${pageContext.request.contextPath }/"/>
 
 
     <input type="hidden" id="userName" value="${param.userName}">;
@@ -76,17 +77,44 @@
                         var messageId = newMessage[i].messageId;
                         var senderIdentity = newMessage[i].senderIdentity;
                         var messageContent = newMessage[i].messageContent;
+                        var messageType = newMessage[i].messageType;
                         var createTime = newMessage[i].createTime;
 
-                        if (senderIdentity === "导师") {
-                            var htmlStr = "<div align='right'>" + " [" + createTime + "] " + teacherName + "<br>" + messageContent + "</div>" + "<br>";
+                        if (messageType === "文字") {
+                            if (senderIdentity === "导师") {
+                                var htmlStr = "<div align='right'>" + " [" + createTime + "] " + teacherName + "<br>" + messageContent + "</div>" + "<br>";
+                            } else {
+                                var htmlStr = "<div>" + userName + " [" + createTime + "] " + "<br>" + messageContent + "</div>" + "<br>";
+                            }
+                            $content.append(htmlStr);
+
                         } else {
-                            var htmlStr = "<div>" + userName + " [" + createTime + "] " + "<br>" + messageContent + "</div>" + "<br>";
+                            var img = document.createElement("img");
+                            if (senderIdentity === "导师") {
+
+                                var htmlStr = "<div align='right'>" + " [" + createTime + "] " + teacherName + "</div>";
+                                img.src = "upload/" + messageContent;
+                                img.align = "right";
+                                img.className = 'img-rounded';
+                                img.style = 'max-width: 100px;max-height: 100px';
+
+                                $content.append(htmlStr);
+                                $content.append(img);
+                                $content.append("<br><br><br><br>");
+                                img.onclick = AddImgClickEvent();
+
+                            } else {
+                                var htmlStr = "<div>" + userName + " [" + createTime + "] " + "</div>";
+                                img.src = "upload/" + messageContent;
+                                img.className = 'img-rounded';
+                                img.style = 'max-width: 100px;max-height: 100px';
+
+                                $content.append(htmlStr);
+                                $content.append(img);
+                                $content.append("<br><br>");
+                                img.onclick = AddImgClickEvent();
+                            }
                         }
-
-                        console.log(htmlStr);
-                        $content.append(htmlStr);
-
                         finalMessageId = messageId;
 
                     }
@@ -96,6 +124,35 @@
 
                 }, "json");
 
+            }
+
+            function AddImgClickEvent() {
+                var objs = document.getElementsByTagName("img");
+                for (var i = 0; i < objs.length; i++) {
+                    objs[i].onclick = function () {
+                        window.open(this.src);
+                    };
+                    objs[i].style.cursor = "pointer";
+                }
+            }
+
+
+
+            var messageContent;
+            var isPicture;
+            //获得图片
+            $('#picture').on('input propertyChange', function () {
+                message = document.getElementById('picture');
+                messageContent = document.getElementById('picture');
+                isPicture = true;
+                alert(messageContent);
+            });
+
+            if (messageContent == null || messageContent === "") {
+                $('#txt').on('input propertyChange', function () {
+                    messageContent = $(this).val();
+                });
+                isPicture = false;
             }
 
             //给多行文本框绑定键盘按下事件
@@ -114,13 +171,33 @@
                     var p = new RegExp(/\s+/g);
                     if (messageContent != null && messageContent !== "" && messageContent !== p) {
 
-                        //使用Ajax技术将聊天消息发送到服务器端
-                        $.post("SendMessageByTeacherServlet", {
-                            "chatId": chatId,
-                            "userName": userName,
-                            "teacherName": teacherName,
-                            "messageContent": messageContent
-                        });
+                        if (isPicture) {
+                            var formData = new FormData();
+                            formData.append("attrName", messageContent.files[0]);
+
+                            alert(messageContent);
+
+                            $.ajax({
+                                type: "POST",
+                                url: "SendPictureByTeacherServlet?chatId=" + chatId + "&userName=" + userName + "&teacherName=" + teacherName,
+                                data: formData,
+                                async: false,
+                                cache: false,
+                                contentType: false,
+                                processData: false,
+                            });
+                            document.getElementById('pre-img').src = "";
+                            document.getElementById('picture').src = "";
+                        } else {
+
+                            //使用Ajax技术将聊天消息发送到服务器端
+                            $.post("SendMessageByTeacherServlet", {
+                                "chatId": chatId,
+                                "userName": userName,
+                                "teacherName": teacherName,
+                                "messageContent": messageContent
+                            });
+                        }
 
                     } else {
                         alert("请输入有效信息")
@@ -128,15 +205,20 @@
 
                     //清空多行文本框
                     $("#txt").val("");
+                    messageContent = "";
+                    isPicture = false;
                 }
 
             });
 
             var message;
             //实时获得文本区域的值
-            $('#txt').on('input propertyChange', function () {
-                message = $(this).val();
-            });
+            if (message == null || message === "") {
+                $('#txt').on('input propertyChange', function () {
+                    message = $(this).val();
+                });
+                isPicture = false;
+            }
 
             //给按钮绑定单击事件
             $("#btn").click(function (event) {
@@ -145,26 +227,59 @@
                 var p = new RegExp(/\s+/g);
                 if (message != null && message !== "" && message !== p) {
 
-                    //使用Ajax技术将聊天消息发送到服务器端
-                    $.post("SendMessageByTeacherServlet", {
-                        "chatId": chatId,
-                        "userName": userName,
-                        "teacherName": teacherName,
-                        "messageContent": message
-                    });
+                    if (isPicture) {
+                        var formData = new FormData();
+                        formData.append("attrName", message.files[0]);
+
+                        $.ajax({
+                            type: "POST",
+                            url: "SendPictureByTeacherServlet?chatId=" + chatId + "&userName=" + userName + "&teacherName=" + teacherName,
+                            data: formData,
+                            async: false,
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                        });
+                        document.getElementById('pre-img').src = "";
+                        document.getElementById('picture').src = "";
+                    } else {
+
+                        //使用Ajax技术将聊天消息发送到服务器端
+                        $.post("SendMessageByTeacherServlet", {
+                            "chatId": chatId,
+                            "userName": userName,
+                            "teacherName": teacherName,
+                            "messageContent": message
+                        });
+                    }
                 } else {
                     alert("请输入有效信息")
                 }
 
-
                 //清空文本区域的内容
                 $("#txt").val("");
                 message = "";
+                isPicture = false;
 
             });
 
+            $(document).ready(function () {
+                $("#picture").change(function () {
+                    var current_pic = document.getElementById('picture').files[0];
+                    preview_picture(current_pic);
+                });
+            });
+
+            function preview_picture(pic) {
+                var r = new FileReader();
+                r.readAsDataURL(pic);
+                r.onload = function (e) {
+                    document.getElementById('pre-img').src = this.result;
+                }
+            }
 
         });
+
 
 
     </script>
@@ -207,6 +322,12 @@
 
     }
 
+    #btn_picture {
+
+        position: absolute;
+
+        top: 383px;
+    }
 
     #txt {
 
@@ -214,7 +335,8 @@
 
         position: absolute;
 
-        left: 5px;
+        /*left: 5px;*/
+        left: 43px;
 
         top: 383px;
 
@@ -222,7 +344,8 @@
 
         border: 1px solid #ccc;
 
-        width: 505px;
+        /*width: 505px;*/
+        width: 490px;
 
         height: 35px;
 
@@ -236,7 +359,8 @@
 
         margin: 0;
 
-        left: 524px;
+        /*left: 524px;*/
+        left: 540px;
 
         top: 383px;
 
@@ -258,6 +382,23 @@
 
     }
 
+
+    label {
+        position: relative;
+    }
+
+
+    #btn {
+        margin-right: 5px;
+    }
+
+    #pre-img {
+        position: absolute;
+        left: -102px;
+        top: 373px;
+    }
+
+
 </style>
 
 <div id="container">
@@ -274,9 +415,15 @@
 
 
     <div id="sendMessage">
+        <label class="btn" id="btn_picture">
+            <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+            <input type="file" id="picture" style="display: none">
+        </label>
         <textarea id="txt" class="form-control"></textarea>
         <button id="btn" class="btn btn-primary">发送</button>
     </div>
+
+    <img src="" id="pre-img" style="max-width: 100px;max-height: 100px"/>
 
 </div>
 
