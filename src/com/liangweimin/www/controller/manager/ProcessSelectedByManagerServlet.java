@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * @author 梁伟民
  */
-@WebServlet(name = "ProcessSelectedByManagerServlet", urlPatterns = "/ProcessSelectedByManagerServlet")
+@WebServlet(name = "ProcessSelectedByManagerServlet", urlPatterns = "/manager/ProcessSelectedByManagerServlet")
 public class ProcessSelectedByManagerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

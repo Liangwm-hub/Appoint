@@ -13,7 +13,7 @@ import java.io.PrintWriter;
 /**
  * @author 梁伟民
  */
-@WebServlet(name = "DeleteChatByUserServlet", urlPatterns = "/DeleteChatByUserServlet")
+@WebServlet(name = "DeleteChatByUserServlet", urlPatterns = "/user/DeleteChatByUserServlet")
 public class DeleteChatByUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

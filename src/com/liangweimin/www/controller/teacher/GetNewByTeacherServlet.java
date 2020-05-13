@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * @author 梁伟民
  */
-@WebServlet(name = "GetNewByTeacherServlet", urlPatterns = "/GetNewByTeacherServlet")
+@WebServlet(name = "GetNewByTeacherServlet", urlPatterns = "/teacher/GetNewByTeacherServlet")
 public class GetNewByTeacherServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

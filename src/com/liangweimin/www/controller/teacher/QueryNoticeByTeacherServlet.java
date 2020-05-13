@@ -13,7 +13,7 @@ import java.io.IOException;
 /**
  * @author 梁伟民
  */
-@WebServlet(name = "QueryNoticeByTeacherServlet", urlPatterns = "/QueryNoticeByTeacherServlet")
+@WebServlet(name = "QueryNoticeByTeacherServlet", urlPatterns = "/teacher/QueryNoticeByTeacherServlet")
 public class QueryNoticeByTeacherServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,6 +38,6 @@ public class QueryNoticeByTeacherServlet extends HttpServlet {
         request.setAttribute("notice",notice);
 
         //请求转发
-        request.getRequestDispatcher("teacher_notice_content.jsp").forward(request,response);
+        request.getRequestDispatcher("/view/teacher/teacher_notice_content.jsp").forward(request,response);
     }
 }

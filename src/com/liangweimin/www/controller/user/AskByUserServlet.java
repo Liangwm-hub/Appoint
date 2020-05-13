@@ -13,7 +13,7 @@ import java.io.PrintWriter;
 /**
  * @author 梁伟民
  */
-@WebServlet(name = "AskByUserServlet", urlPatterns = "/AskByUserServlet")
+@WebServlet(name = "AskByUserServlet", urlPatterns = "/user/AskByUserServlet")
 public class AskByUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -16,7 +16,7 @@ import java.io.PrintWriter;
  * 导师发布预约
  * @author 梁伟民
  */
-@WebServlet(name = "SetAppointmentServlet", urlPatterns = "/SetAppointmentServlet")
+@WebServlet(name = "SetAppointmentServlet", urlPatterns = "/teacher/SetAppointmentServlet")
 public class SetAppointmentServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

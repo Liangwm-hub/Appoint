@@ -13,7 +13,7 @@ import java.io.IOException;
  * 查询对应的预约
  * @author 梁伟民
  */
-@WebServlet(name = "QueryReleaseServlet",urlPatterns = "/QueryReleaseServlet")
+@WebServlet(name = "QueryReleaseServlet",urlPatterns = "/teacher/QueryReleaseServlet")
 public class QueryReleaseServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,6 +35,6 @@ public class QueryReleaseServlet extends HttpServlet {
 
         //转发到updateRelease进行展示
         request.setAttribute("release", release);
-        request.getRequestDispatcher("updateRelease.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/teacher/updateRelease.jsp").forward(request, response);
     }
 }

@@ -16,7 +16,7 @@ import java.io.IOException;
  * 查找导师发布的全部预约,即出行计划
  * @author 梁伟民
  */
-@WebServlet(name = "FindReleaseByPageServlet",urlPatterns = "/FindReleaseByPageServlet")
+@WebServlet(name = "FindReleaseByPageServlet",urlPatterns = "/teacher/FindReleaseByPageServlet")
 public class FindReleaseByPageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,7 +41,7 @@ public class FindReleaseByPageServlet extends HttpServlet {
         if (currentPage==null||"".equals(currentPage)){
             currentPage="1";
         }
-        if (rows==null|| rows.equals("")){
+        if (rows==null|| "".equals(rows)){
             rows="5";
         }
 
@@ -53,7 +53,7 @@ public class FindReleaseByPageServlet extends HttpServlet {
         request.setAttribute("pb",pb);
 
         //4.转发到releaseList.jsp
-        request.getRequestDispatcher("releaseList.jsp").forward(request,response);
+        request.getRequestDispatcher("/view/teacher/releaseList.jsp").forward(request,response);
 
     }
 }

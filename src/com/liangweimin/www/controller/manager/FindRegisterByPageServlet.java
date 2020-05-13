@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * @author 梁伟民
  */
-@WebServlet(name = "FindRegisterByPageServlet", urlPatterns = "/FindRegisterByPageServlet")
+@WebServlet(name = "FindRegisterByPageServlet", urlPatterns = "/manager/FindRegisterByPageServlet")
 public class FindRegisterByPageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,7 +47,7 @@ public class FindRegisterByPageServlet extends HttpServlet {
         request.setAttribute("pb",pb);
 
         //4.转发到processRequest.jsp
-        request.getRequestDispatcher("processUserRegister.jsp").forward(request,response);
+        request.getRequestDispatcher("/view/manager/processUserRegister.jsp").forward(request,response);
 
     }
 }

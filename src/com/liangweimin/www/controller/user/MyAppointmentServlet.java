@@ -16,7 +16,7 @@ import java.io.IOException;
  * 显示用户的预约
  * @author 梁伟民
  */
-@WebServlet(name = "MyAppointmentServlet",urlPatterns = "/MyAppointmentServlet")
+@WebServlet(name = "MyAppointmentServlet",urlPatterns = "/user/MyAppointmentServlet")
 public class MyAppointmentServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -53,7 +53,7 @@ public class MyAppointmentServlet extends HttpServlet {
         request.setAttribute("pb",pb);
 
         //4.转发到releaseList.jsp
-        request.getRequestDispatcher("myAppointment.jsp").forward(request,response);
+        request.getRequestDispatcher("/view/user/myAppointment.jsp").forward(request,response);
 
     }
 }

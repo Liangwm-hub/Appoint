@@ -35,7 +35,7 @@
     <h3>设置新密码</h3>
 </div>
 
-<form class="form-inline" action="${pageContext.request.serverName}/UserSetPasswordServlet" method="post">
+<form class="form-inline" action="user/UserSetPasswordServlet" method="post">
     <table align="center">
         <tr>
             <td><h4>学 号: </h4></td>

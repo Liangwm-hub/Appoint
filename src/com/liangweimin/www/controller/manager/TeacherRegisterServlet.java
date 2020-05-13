@@ -15,7 +15,7 @@ import java.io.PrintWriter;
 /**
  * @author 梁伟民
  */
-@WebServlet(name = "TeacherRegisterServlet", urlPatterns = "/TeacherRegisterServlet")
+@WebServlet(name = "TeacherRegisterServlet", urlPatterns = "/manager/TeacherRegisterServlet")
 public class TeacherRegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

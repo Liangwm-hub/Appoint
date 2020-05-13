@@ -13,7 +13,7 @@ import java.io.IOException;
  * 导师拒绝学生的预约
  * @author 梁伟民
  */
-@WebServlet(name = "RefuseRequestByNumServlet",urlPatterns = "/RefuseRequestByNumServlet")
+@WebServlet(name = "RefuseRequestByNumServlet",urlPatterns = "/teacher/RefuseRequestByNumServlet")
 public class RefuseRequestByNumServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

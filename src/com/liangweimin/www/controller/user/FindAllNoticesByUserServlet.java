@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * @author 梁伟民
  */
-@WebServlet(name = "FindAllNoticesByUserServlet", urlPatterns = "/FindAllNoticesByUserServlet")
+@WebServlet(name = "FindAllNoticesByUserServlet", urlPatterns = "/user/FindAllNoticesByUserServlet")
 public class FindAllNoticesByUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,6 +32,6 @@ public class FindAllNoticesByUserServlet extends HttpServlet {
         request.setAttribute("notices",notices);
 
         //请求转发
-        request.getRequestDispatcher("readNoticesByUser.jsp").forward(request,response);
+        request.getRequestDispatcher("/view/user/readNoticesByUser.jsp").forward(request,response);
     }
 }

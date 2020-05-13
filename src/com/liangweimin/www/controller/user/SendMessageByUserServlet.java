@@ -15,7 +15,7 @@ import java.util.Date;
 /**
  * @author 梁伟民
  */
-@WebServlet(name = "SendMessageByUserServlet", urlPatterns = "/SendMessageByUserServlet")
+@WebServlet(name = "SendMessageByUserServlet", urlPatterns = "/user/SendMessageByUserServlet")
 public class SendMessageByUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

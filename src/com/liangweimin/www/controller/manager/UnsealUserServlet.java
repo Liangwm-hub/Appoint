@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * @author 梁伟民
  */
-@WebServlet(name = "UnsealUserServlet",urlPatterns = "/UnsealUserServlet")
+@WebServlet(name = "UnsealUserServlet",urlPatterns = "/manager/UnsealUserServlet")
 public class UnsealUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

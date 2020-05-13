@@ -13,7 +13,7 @@ import java.io.PrintWriter;
 /**
  * @author 梁伟民
  */
-@WebServlet(name = "DeleteNoticeByIdServlet", urlPatterns = "/DeleteNoticeByIdServlet")
+@WebServlet(name = "DeleteNoticeByIdServlet", urlPatterns = "/manager/DeleteNoticeByIdServlet")
 public class DeleteNoticeByIdServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

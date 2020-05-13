@@ -15,7 +15,7 @@ import java.io.PrintWriter;
  * 用户修改个人信息
  * @author 梁伟民
  */
-@WebServlet(name = "UpdateUserServlet",urlPatterns = "/UpdateUserServlet")
+@WebServlet(name = "UpdateUserServlet",urlPatterns = "/user/UpdateUserServlet")
 public class UpdateUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -46,7 +46,7 @@ public class UpdateUserServlet extends HttpServlet {
         if (result) {
             //修改成功,转发到原来的页面
             request.setAttribute("user", user);
-            request.getRequestDispatcher("updateUser.jsp").forward(request, response);
+            request.getRequestDispatcher("/view/user/updateUser.jsp").forward(request, response);
         } else {
             //修改失败，提示修改失败
             PrintWriter writer = response.getWriter();

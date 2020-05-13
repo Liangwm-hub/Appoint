@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * @author 梁伟民
  */
-@WebServlet(name = "AllRequestsServlet",urlPatterns = "/AllRequestsServlet")
+@WebServlet(name = "AllRequestsServlet",urlPatterns = "/manager/AllRequestsServlet")
 public class AllRequestsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,7 +35,7 @@ public class AllRequestsServlet extends HttpServlet {
         if (currentPage==null||"".equals(currentPage)){
             currentPage="1";
         }
-        if (rows==null|| rows.equals("")){
+        if (rows==null|| "".equals(rows)){
             rows="10";
         }
 
@@ -47,7 +47,7 @@ public class AllRequestsServlet extends HttpServlet {
         request.setAttribute("pb",pb);
 
         //4.转发到processRequest.jsp
-        request.getRequestDispatcher("allRequests.jsp").forward(request,response);
+        request.getRequestDispatcher("/view/manager/allRequests.jsp").forward(request,response);
 
     }
 }

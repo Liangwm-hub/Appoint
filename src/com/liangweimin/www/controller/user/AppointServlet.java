@@ -3,6 +3,8 @@ package com.liangweimin.www.controller.user;
 import com.liangweimin.www.po.Release;
 import com.liangweimin.www.service.TeacherService;
 import com.liangweimin.www.service.UserService;
+import com.liangweimin.www.util.Constant;
+import com.liangweimin.www.util.MethodUtil;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -23,7 +25,7 @@ import java.util.List;
 /**
  * @author 梁伟民
  */
-@WebServlet(name = "AppointServlet", urlPatterns = "/AppointServlet")
+@WebServlet(name = "AppointServlet", urlPatterns = "/user/AppointServlet")
 public class AppointServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,11 +37,6 @@ public class AppointServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=UTF-8");
-
-        //三种图片的后缀
-        String jpg = "jpg";
-        String gif = "gif";
-        String png = "png";
 
         //获得导师的数据
         int id = Integer.parseInt(request.getParameter("id"));
@@ -85,13 +82,13 @@ public class AppointServlet extends HttpServlet {
                     fileName = item.getName();
 
                     //文件名不能为为空或者""
-                    if (fileName != null && !"".equals(fileName)) {
+                    if (MethodUtil.haveFile(fileName)) {
                         //现限制文件为图片
                         //获取后缀 (如a.png, "."的索引+1 之后对应的即为后缀)
                         String ext = fileName.substring(fileName.indexOf(".") + 1);
 
                         //不是图片的情况
-                        if (!((png.equals(ext)) || (gif.equals(ext)) || (jpg.equals(ext)))) {
+                        if (!((Constant.PNG.equals(ext)) || (Constant.GIF.equals(ext)) || (Constant.JPG.equals(ext)))) {
                             PrintWriter writer = response.getWriter();
                             writer.println("您上传的不是图片!");
                             //终止

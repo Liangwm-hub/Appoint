@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * @author 梁伟民
  */
-@WebServlet(name = "FindFreezeUserByPageServlet",urlPatterns = "/FindFreezeUserByPageServlet")
+@WebServlet(name = "FindFreezeUserByPageServlet",urlPatterns = "/manager/FindFreezeUserByPageServlet")
 public class FindFreezeUserByPageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,7 +35,7 @@ public class FindFreezeUserByPageServlet extends HttpServlet {
         if (currentPage==null||"".equals(currentPage)){
             currentPage="1";
         }
-        if (rows==null|| rows.equals("")){
+        if (rows==null|| "".equals(rows)){
             rows="10";
         }
 
@@ -47,7 +47,7 @@ public class FindFreezeUserByPageServlet extends HttpServlet {
         request.setAttribute("pb",pb);
 
         //4.转发到processRequest.jsp
-        request.getRequestDispatcher("frozenUser.jsp").forward(request,response);
+        request.getRequestDispatcher("/view/manager/frozenUser.jsp").forward(request,response);
 
     }
 }

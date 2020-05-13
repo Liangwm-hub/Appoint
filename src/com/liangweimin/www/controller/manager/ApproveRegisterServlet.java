@@ -13,7 +13,7 @@ import java.io.IOException;
  * 批量批准用户注册
  * @author 梁伟民
  */
-@WebServlet(name = "ApproveRegisterServlet",urlPatterns = "/ApproveRegisterServlet")
+@WebServlet(name = "ApproveRegisterServlet",urlPatterns = "/manager/ApproveRegisterServlet")
 public class ApproveRegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

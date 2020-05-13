@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * @author 梁伟民
  */
-@WebServlet(name = "FreezeUserServlet",urlPatterns = "/FreezeUserServlet")
+@WebServlet(name = "FreezeUserServlet",urlPatterns = "/manager/FreezeUserServlet")
 public class FreezeUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

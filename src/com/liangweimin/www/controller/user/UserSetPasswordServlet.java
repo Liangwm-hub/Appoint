@@ -15,7 +15,7 @@ import java.io.PrintWriter;
 /**
  * @author 梁伟民
  */
-@WebServlet(name = "UserSetPasswordServlet", urlPatterns = "/UserSetPasswordServlet")
+@WebServlet(name = "UserSetPasswordServlet", urlPatterns = "/user/UserSetPasswordServlet")
 public class UserSetPasswordServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -57,7 +57,7 @@ public class UserSetPasswordServlet extends HttpServlet {
 
                 //注册请求成功
                 if (success) {
-                    response.sendRedirect("userLogin.jsp");
+                    response.sendRedirect("/view/user/userLogin.jsp");
                 } else {
                     writer.println("修改失败，请检查您的输入！");
                 }

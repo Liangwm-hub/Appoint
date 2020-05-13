@@ -15,7 +15,7 @@ import java.io.IOException;
 /**
  * @author 梁伟民
  */
-@WebServlet(name = "TeacherLoginServlet", urlPatterns = "/TeacherLoginServlet")
+@WebServlet(name = "TeacherLoginServlet", urlPatterns = "/teacher/TeacherLoginServlet")
 public class TeacherLoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -59,12 +59,12 @@ public class TeacherLoginServlet extends HttpServlet {
                 request.getRequestDispatcher("FindReleaseByPageServlet").forward(request,response);
             } else {
                 //重新登录
-                response.sendRedirect("teacherLogin.jsp");
+                response.sendRedirect("/view/teacher/teacherLogin.jsp");
             }
 
         } else {
             //验证码不正确
-            response.sendRedirect("teacherLogin.jsp");
+            response.sendRedirect("/view/teacher/teacherLogin.jsp");
         }
     }
 }

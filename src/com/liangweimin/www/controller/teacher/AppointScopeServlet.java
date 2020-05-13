@@ -2,6 +2,7 @@ package com.liangweimin.www.controller.teacher;
 
 import com.liangweimin.www.service.TeacherService;
 import com.liangweimin.www.util.Constant;
+import com.liangweimin.www.util.MethodUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,9 +15,10 @@ import java.io.PrintWriter;
 
 /**
  * 导师设置预约期限
+ *
  * @author 梁伟民
  */
-@WebServlet(name = "AppointScopeServlet", urlPatterns = "/AppointScopeServlet")
+@WebServlet(name = "AppointScopeServlet", urlPatterns = "/teacher/AppointScopeServlet")
 public class AppointScopeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,7 +39,7 @@ public class AppointScopeServlet extends HttpServlet {
         int id = (int) session.getAttribute("id");
 
         //scope不为空
-        if ( isNumber(scope1) ) {
+        if (MethodUtil.isNumber(scope1)) {
             //转成int类型
             int scope = Integer.parseInt(scope1);
             //必须在1~100之间
@@ -64,22 +66,4 @@ public class AppointScopeServlet extends HttpServlet {
     }
 
 
-    /**
-     * 一个用来判断输入字符串是否为数字的方法
-     *
-     * @param str
-     * @return
-     */
-    public static boolean isNumber(String str) {
-        for (int i = 0; i < str.length(); i++) {
-
-            //isDigit(char ch)判断字符是否是数字
-            if (!Character.isDigit(str.charAt(i))) {
-                return false;
-            }
-
-        }
-        //str不能为""
-        return !"".equals(str);
-    }
 }

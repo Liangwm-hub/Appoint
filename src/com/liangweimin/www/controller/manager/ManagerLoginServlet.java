@@ -16,7 +16,7 @@ import java.io.IOException;
  * 管理员登录
  * @author 梁伟民
  */
-@WebServlet(name = "ManagerLoginServlet",urlPatterns = "/ManagerLoginServlet")
+@WebServlet(name = "ManagerLoginServlet",urlPatterns = "/manager/ManagerLoginServlet")
 public class ManagerLoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -59,12 +59,12 @@ public class ManagerLoginServlet extends HttpServlet {
                 response.sendRedirect("AllRequestsServlet");
             } else {
                 //重新登录
-                response.sendRedirect("managerLogin.jsp");
+                response.sendRedirect("/view/manager/managerLogin.jsp");
             }
 
         } else {
             //验证码不正确
-            response.sendRedirect("managerLogin.jsp");
+            response.sendRedirect("/view/manager/managerLogin.jsp");
         }
     }
 }

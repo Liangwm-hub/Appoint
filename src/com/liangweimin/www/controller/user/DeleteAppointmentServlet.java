@@ -13,7 +13,7 @@ import java.io.PrintWriter;
 /**
  * @author 梁伟民
  */
-@WebServlet(name = "DeleteAppointmentServlet",urlPatterns = "/DeleteAppointmentServlet")
+@WebServlet(name = "DeleteAppointmentServlet",urlPatterns = "/user/DeleteAppointmentServlet")
 public class DeleteAppointmentServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

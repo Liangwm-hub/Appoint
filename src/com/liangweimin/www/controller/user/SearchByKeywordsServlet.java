@@ -16,7 +16,7 @@ import java.io.IOException;
  * 搜索老师发布的预约
  * @author 梁伟民
  */
-@WebServlet(name = "SearchByKeywordsServlet", urlPatterns = "/SearchByKeywordsServlet")
+@WebServlet(name = "SearchByKeywordsServlet", urlPatterns = "/user/SearchByKeywordsServlet")
 public class SearchByKeywordsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,7 +39,7 @@ public class SearchByKeywordsServlet extends HttpServlet {
         if (currentPage == null || "".equals(currentPage)) {
             currentPage = "1";
         }
-        if (rows == null || rows.equals("")) {
+        if (rows == null || "".equals(rows)) {
             rows = "5";
         }
 
@@ -64,7 +64,7 @@ public class SearchByKeywordsServlet extends HttpServlet {
         request.setAttribute("pb", pb);
 
         //4.转发到releaseList.jsp
-        request.getRequestDispatcher("searchRelease.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/user/searchRelease.jsp").forward(request, response);
 
     }
 }

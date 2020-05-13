@@ -1,5 +1,7 @@
 package com.liangweimin.www.controller.user;
 
+import com.liangweimin.www.util.MethodUtil;
+
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +16,7 @@ import java.net.URLEncoder;
 /**
  * @author 梁伟民
  */
-@WebServlet(name = "DownloadFileByUserServlet", urlPatterns = "/DownloadFileByUserServlet")
+@WebServlet(name = "DownloadFileByUserServlet", urlPatterns = "/user/DownloadFileByUserServlet")
 public class DownloadFileByUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,7 +33,7 @@ public class DownloadFileByUserServlet extends HttpServlet {
         String fileName = request.getParameter("fileName");
 
         //有文件的情况
-        if (fileName != null && !("".equals(fileName)) && !("null".equals(fileName))) {
+        if (MethodUtil.haveFile(fileName)) {
 
             //下载文件:需要设置消息头
             //类型为二进制文件类型(任意文件)

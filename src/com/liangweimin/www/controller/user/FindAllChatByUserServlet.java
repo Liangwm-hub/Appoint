@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author 梁伟民
  */
-@WebServlet(name = "FindAllChatByUserServlet", urlPatterns = "/FindAllChatByUserServlet")
+@WebServlet(name = "FindAllChatByUserServlet", urlPatterns = "/user/FindAllChatByUserServlet")
 public class FindAllChatByUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

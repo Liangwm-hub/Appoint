@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author 梁伟民
  */
-@WebFilter(filterName = "SensitiveWordsFilter", value = {"/SendMessageByUserServlet","/SendMessageByTeacherServlet"} )
+@WebFilter(filterName = "SensitiveWordsFilter", value = {"/user/SendMessageByUserServlet","/teacher/SendMessageByTeacherServlet"} )
 public class SensitiveWordsFilter implements Filter {
 
     /**

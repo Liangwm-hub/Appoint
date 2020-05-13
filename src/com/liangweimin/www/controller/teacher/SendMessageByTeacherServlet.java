@@ -15,7 +15,7 @@ import java.util.Date;
 /**
  * @author 梁伟民
  */
-@WebServlet(name = "SendMessageByTeacherServlet", urlPatterns = "/SendMessageByTeacherServlet")
+@WebServlet(name = "SendMessageByTeacherServlet", urlPatterns = "/teacher/SendMessageByTeacherServlet")
 public class SendMessageByTeacherServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,7 +41,7 @@ public class SendMessageByTeacherServlet extends HttpServlet {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String currentTime = simpleDateFormat.format(date);
 
-        //设置身份为学生
+        //设置身份为导师
         String senderIdentity = "导师";
 
         //封装

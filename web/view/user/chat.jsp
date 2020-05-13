@@ -46,7 +46,7 @@
             //声明函数：询问服务器端是否存在新的聊天记录
             function askForNew() {
 
-                $.post("AskByUserServlet", {"finalMessageId": finalMessageId, "chatId": chatId}, function (hasNew) {
+                $.post("user/AskByUserServlet", {"finalMessageId": finalMessageId, "chatId": chatId}, function (hasNew) {
 
                     if (hasNew === 'true') {
 
@@ -66,7 +66,7 @@
 
                 var $content = $("#content");
 
-                $.post("GetNewByUserServlet", {
+                $.post("user/GetNewByUserServlet", {
                     "finalMessageId": finalMessageId,
                     "chatId": chatId
                 }, function (newMessage) {
@@ -175,7 +175,7 @@
 
                             $.ajax({
                                 type: "POST",
-                                url: "SendPictureByUserServlet?chatId=" + chatId + "&userName=" + userName + "&teacherName=" + teacherName,
+                                url: "user/SendPictureByUserServlet?chatId=" + chatId + "&userName=" + userName + "&teacherName=" + teacherName,
                                 data: formData,
                                 async: false,
                                 cache: false,
@@ -187,7 +187,7 @@
                         } else {
 
                             //使用Ajax技术将聊天消息发送到服务器端
-                            $.post("SendMessageByUserServlet", {
+                            $.post("user/SendMessageByUserServlet", {
                                 "chatId": chatId,
                                 "userName": userName,
                                 "teacherName": teacherName,
@@ -230,7 +230,7 @@
 
                         $.ajax({
                             type: "POST",
-                            url: "SendPictureByUserServlet?chatId=" + chatId + "&userName=" + userName + "&teacherName=" + teacherName,
+                            url: "user/SendPictureByUserServlet?chatId=" + chatId + "&userName=" + userName + "&teacherName=" + teacherName,
                             data: formData,
                             async: false,
                             cache: false,
@@ -242,7 +242,7 @@
                     } else {
 
                         //使用Ajax技术将聊天消息发送到服务器端
-                        $.post("SendMessageByUserServlet", {
+                        $.post("user/SendMessageByUserServlet", {
                             "chatId": chatId,
                             "userName": userName,
                             "teacherName": teacherName,

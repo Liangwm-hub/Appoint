@@ -13,7 +13,7 @@ import java.io.IOException;
 /**
  * @author 梁伟民
  */
-@WebServlet(name = "QueryUserBySnoServlet",urlPatterns = "/QueryUserBySnoServlet")
+@WebServlet(name = "QueryUserBySnoServlet",urlPatterns = "/user/QueryUserBySnoServlet")
 public class QueryUserBySnoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,7 +34,7 @@ public class QueryUserBySnoServlet extends HttpServlet {
 
         //请求转发到updateUser进行展示
         request.setAttribute("user", user);
-        request.getRequestDispatcher("updateUser.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/user/updateUser.jsp").forward(request, response);
 
     }
 }

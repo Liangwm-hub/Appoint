@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * @author 梁伟民
  */
-@WebServlet(name = "RefuseSelectedByManagerServlet",urlPatterns = "/RefuseSelectedByManagerServlet")
+@WebServlet(name = "RefuseSelectedByManagerServlet",urlPatterns = "/manager/RefuseSelectedByManagerServlet")
 public class RefuseSelectedByManagerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -11,9 +11,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
+ * 删除聊天
  * @author 梁伟民
  */
-@WebServlet(name = "DeleteChatByTeacherServlet", urlPatterns = "/DeleteChatByTeacherServlet")
+@WebServlet(name = "DeleteChatByTeacherServlet", urlPatterns = "/teacher/DeleteChatByTeacherServlet")
 public class DeleteChatByTeacherServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

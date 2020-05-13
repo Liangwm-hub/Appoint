@@ -16,7 +16,7 @@ import java.io.IOException;
  * 导师处理请求
  * @author 梁伟民
  */
-@WebServlet(name = "ProcessRequestServlet",urlPatterns = "/ProcessRequestServlet")
+@WebServlet(name = "ProcessRequestServlet",urlPatterns = "/teacher/ProcessRequestServlet")
 public class ProcessRequestServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -53,7 +53,7 @@ public class ProcessRequestServlet extends HttpServlet {
         request.setAttribute("pb",pb);
 
         //4.转发到processRequest.jsp
-        request.getRequestDispatcher("processRequest.jsp").forward(request,response);
+        request.getRequestDispatcher("/view/teacher/processRequest.jsp").forward(request,response);
 
     }
 }

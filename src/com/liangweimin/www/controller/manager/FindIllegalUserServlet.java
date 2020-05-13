@@ -13,7 +13,7 @@ import java.io.IOException;
 /**
  * @author 梁伟民
  */
-@WebServlet(name = "FindIllegalUserServlet",urlPatterns = "/FindIllegalUserServlet")
+@WebServlet(name = "FindIllegalUserServlet",urlPatterns = "/manager/FindIllegalUserServlet")
 public class FindIllegalUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,6 +34,6 @@ public class FindIllegalUserServlet extends HttpServlet {
 
         //请求转发到updateUser进行展示
         request.setAttribute("user", user);
-        request.getRequestDispatcher("freezeUser.jsp").forward(request,response);
+        request.getRequestDispatcher("/view/manager/freezeUser.jsp").forward(request,response);
     }
 }

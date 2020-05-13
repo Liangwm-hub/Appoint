@@ -2,6 +2,8 @@ package com.liangweimin.www.controller.user;
 
 import com.liangweimin.www.po.ChatMessage;
 import com.liangweimin.www.service.UserService;
+import com.liangweimin.www.util.Constant;
+import com.liangweimin.www.util.MethodUtil;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -19,12 +21,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 /**
  * @author 梁伟民
  */
-@WebServlet(name = "SendPictureByUserServlet", urlPatterns = "/SendPictureByUserServlet")
+@WebServlet(name = "SendPictureByUserServlet", urlPatterns = "/user/SendPictureByUserServlet")
 public class SendPictureByUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,11 +42,6 @@ public class SendPictureByUserServlet extends HttpServlet {
         int chatId = Integer.parseInt(request.getParameter("chatId"));
         String userName = request.getParameter("userName");
         String teacherName = request.getParameter("teacherName");
-
-        //三种图片的后缀
-        String jpg = "jpg";
-        String gif = "gif";
-        String png = "png";
 
         //文件名
         String fileName;
@@ -80,7 +76,7 @@ public class SendPictureByUserServlet extends HttpServlet {
                         String ext = fileName.substring(fileName.indexOf(".") + 1);
 
                         //不是图片的情况
-                        if (!((png.equals(ext)) || (gif.equals(ext)) || (jpg.equals(ext)))) {
+                        if (!((Constant.PNG.equals(ext)) || (Constant.GIF.equals(ext)) || (Constant.JPG.equals(ext)))) {
                             PrintWriter writer = response.getWriter();
                             writer.println("您上传的不是图片!");
                             //终止
@@ -94,10 +90,7 @@ public class SendPictureByUserServlet extends HttpServlet {
                         String path = request.getServletContext().getRealPath("/upload");
 
                         //修改文件名为当前时间+随机数,以避免名字重复
-                        String formatDate = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-                        String s = String.valueOf(new Random().nextInt(100000));
-
-                        fileName=formatDate+s+"."+ext;
+                        fileName = MethodUtil.getNewFileName(fileName);
 
                         //路径和文件名
                         File file = new File(path, fileName);

@@ -30,23 +30,20 @@
 <%--导航条--%>
 <ul class="nav nav-tabs" style="font-size: 21px;">
     <li>
-        <a href="FindReleaseByPageServlet">出行计划</a>
+        <a href="teacher/FindReleaseByPageServlet">出行计划</a>
     </li>
     <li>
-        <a href="ProcessRequestServlet">处理请求</a>
+        <a href="teacher/ProcessRequestServlet">处理请求</a>
     </li>
     <li>
-        <a href="setAppointment.jsp">发布预约</a>
+        <a href="view/teacher/setAppointment.jsp">发布预约</a>
     </li>
     <li class="active">
-        <a href="FindAllChatByTeacherServlet">聊天记录</a>
+        <a href="teacher/FindAllChatByTeacherServlet">聊天记录</a>
     </li>
     <li>
-        <a href="FindAllNoticesByTeacherServlet">通知</a>
+        <a href="teacher/FindAllNoticesByTeacherServlet">通知</a>
     </li>
-    <div align="right">
-        <h5>会面预约系统(教师端)</h5>
-    </div>
 </ul>
 
 
@@ -64,7 +61,7 @@
             <td>
                 <a href="${pageContext.request.contextPath}/view/teacher/chat.jsp?chatId=${chatRoom.chatId}&userName=${chatRoom.userName}&teacherName=${chatRoom.teacherName}"
                    class="btn btn-primary">进入聊天室</a>
-                <a href="DeleteChatByTeacherServlet?chatId=${chatRoom.chatId}&teacherId=${chatRoom.teacherId}"
+                <a href="teacher/DeleteChatByTeacherServlet?chatId=${chatRoom.chatId}&teacherId=${chatRoom.teacherId}"
                    class="btn btn-danger">删除聊天记录</a>
             </td>
         </tr>

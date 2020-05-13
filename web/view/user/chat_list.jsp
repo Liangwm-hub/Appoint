@@ -9,6 +9,7 @@
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>index</title>
 
+    <base href="http://${pageContext.request.serverName }:${pageContext.request.serverPort }${pageContext.request.contextPath }/"/>
     <!-- Bootstrap -->
     <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 
@@ -28,19 +29,19 @@
 <%--导航条--%>
 <ul class="nav nav-tabs" style="font-size: 21px;" >
     <li>
-        <a href="FindReleaseByUserServlet">预约导师</a>
+        <a href="user/FindReleaseByUserServlet">预约导师</a>
     </li>
     <li>
-        <a href="MyAppointmentServlet">我的预约</a>
+        <a href="user/MyAppointmentServlet">我的预约</a>
     </li>
     <li>
-        <a href="QueryUserBySnoServlet">个人信息</a>
+        <a href="user/QueryUserBySnoServlet">个人信息</a>
     </li>
     <li class="active">
-        <a href="FindAllChatByUserServlet">聊天记录</a>
+        <a href="user/FindAllChatByUserServlet">聊天记录</a>
     </li>
     <li>
-        <a href="FindAllNoticesByUserServlet">通知</a>
+        <a href="user/FindAllNoticesByUserServlet">通知</a>
     </li>
 </ul>
 
@@ -58,7 +59,7 @@
             <td>
                 <a href="${pageContext.request.contextPath}/view/user/chat.jsp?chatId=${chatRoom.chatId}&userName=${chatRoom.userName}&teacherName=${chatRoom.teacherName}"
                    class="btn btn-primary">进入聊天室</a>
-                <a href="DeleteChatByUserServlet?chatId=${chatRoom.chatId}&userSno=${chatRoom.userSno}"
+                <a href="user/DeleteChatByUserServlet?chatId=${chatRoom.chatId}&userSno=${chatRoom.userSno}"
                    class="btn btn-danger">删除聊天记录</a>
             </td>
         </tr>

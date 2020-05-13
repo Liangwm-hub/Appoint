@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * @author 梁伟民
  */
-@WebServlet(name = "TestServlet", urlPatterns = "/TestServlet")
+@WebServlet(name = "TestServlet", urlPatterns = "/test/TestServlet")
 public class TestServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -21,10 +21,7 @@ public class TestServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
 
-//        int id = Integer.parseInt(request.getParameter("id"));
-        int id = Integer.parseInt(request.getParameter("id"));
-        String name = request.getParameter("name");
-        String msg = request.getParameter("msg");
-        System.out.println(id+","+name+":"+msg);
+        System.out.println("yes!");
+        System.out.println("yes!");
     }
 }

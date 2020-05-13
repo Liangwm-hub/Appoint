@@ -13,7 +13,7 @@ import java.io.IOException;
  * 批量批准选中的请求
  * @author 梁伟民
  */
-@WebServlet(name = "ProcessSelectedServlet", urlPatterns = "/ProcessSelectedServlet")
+@WebServlet(name = "ProcessSelectedServlet", urlPatterns = "/teacher/ProcessSelectedServlet")
 public class ProcessSelectedServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

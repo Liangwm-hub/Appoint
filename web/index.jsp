@@ -32,9 +32,9 @@
 </div>
 
 <div align="center">
-    <a href="userLogin.jsp" class="btn btn-primary btn-lg active" role="button">学生登录</a><br><br>
-    <a href="teacherLogin.jsp" class="btn btn-primary btn-lg active" role="button">导师登录</a>
-    <a href="managerLogin.jsp" class="btn btn-primary btn-lg active" role="button">管理员登录</a>
+    <a href="view/user/userLogin.jsp" class="btn btn-primary btn-lg active" role="button">学生登录</a><br><br>
+    <a href="view/teacher/teacherLogin.jsp" class="btn btn-primary btn-lg active" role="button">导师登录</a>
+    <a href="view/manager/managerLogin.jsp" class="btn btn-primary btn-lg active" role="button">管理员登录</a>
 </div>
 
 </body>

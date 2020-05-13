@@ -2,6 +2,7 @@ package com.liangweimin.www.controller.manager;
 
 import com.liangweimin.www.po.Notice;
 import com.liangweimin.www.service.ManagerService;
+import com.liangweimin.www.util.MethodUtil;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -21,7 +22,7 @@ import java.util.List;
 /**
  * @author 梁伟民
  */
-@WebServlet(name = "NoticeServlet", urlPatterns = "/NoticeServlet")
+@WebServlet(name = "NoticeServlet", urlPatterns = "/manager/NoticeServlet")
 public class NoticeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -60,7 +61,6 @@ public class NoticeServlet extends HttpServlet {
                 Iterator<FileItem> iterator = items.iterator();
 
                 while (iterator.hasNext()) {
-                    System.out.println(iterator.hasNext());
                     //item表示集合的一个元素
                     FileItem item = iterator.next();
 
@@ -84,9 +84,12 @@ public class NoticeServlet extends HttpServlet {
                         fileName = item.getName();
 
                         //上传文件不能为空
-                        if (fileName != null && !("".equals(fileName))) {
+                        if (MethodUtil.haveFile(fileName) && !"".equals(noticeContent) && !"".equals(noticeTitle)) {
                             //动态获取指定上传的位置(服务器路径)
                             String path = request.getServletContext().getRealPath("/upload");
+
+                            //修改文件名
+                            fileName = MethodUtil.getNewFileName(fileName);
 
                             //路径和文件名
                             File file = new File(path, fileName);
@@ -98,14 +101,16 @@ public class NoticeServlet extends HttpServlet {
                     }
                 }
 
-                //封装,调用service层,在notice表新增一条记录
-                Notice notice = new Notice(noticeTitle, noticeContent, fileName);
-                ManagerService managerService = new ManagerService();
-                boolean success = managerService.issueNotice(notice);
+                boolean success = false;
+                if (!"".equals(noticeContent) && !"".equals(noticeTitle)) {
+                    //封装,调用service层,在notice表新增一条记录
+                    Notice notice = new Notice(noticeTitle, noticeContent, fileName);
+                    ManagerService managerService = new ManagerService();
+                    success = managerService.issueNotice(notice);
+                }
 
                 if (success) {
-                    System.out.println("上传成功");
-                    response.sendRedirect("notice.jsp");
+                    response.sendRedirect("QueryNoticeByManagerServlet");
                 } else {
                     PrintWriter writer = response.getWriter();
                     writer.println("发布失败,请检查您的输入!");

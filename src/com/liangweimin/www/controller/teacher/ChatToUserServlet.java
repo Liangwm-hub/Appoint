@@ -17,7 +17,7 @@ import java.io.IOException;
  * 创建或进入聊天室
  * @author 梁伟民
  */
-@WebServlet(name = "ChatToUserServlet", urlPatterns = "/ChatToUserServlet")
+@WebServlet(name = "ChatToUserServlet", urlPatterns = "/teacher/ChatToUserServlet")
 public class ChatToUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

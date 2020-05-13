@@ -14,7 +14,7 @@ import java.io.PrintWriter;
  * 私聊时询问是否有新的消息
  * @author 梁伟民
  */
-@WebServlet(name = "AskByTeacherServlet", urlPatterns = "/AskByTeacherServlet")
+@WebServlet(name = "AskByTeacherServlet", urlPatterns = "/teacher/AskByTeacherServlet")
 public class AskByTeacherServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

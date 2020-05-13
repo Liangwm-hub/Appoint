@@ -16,7 +16,7 @@ import java.io.IOException;
 /**
  * @author 梁伟民
  */
-@WebServlet(name = "ChatToTeacherServlet", urlPatterns = "/ChatToTeacherServlet")
+@WebServlet(name = "ChatToTeacherServlet", urlPatterns = "/user/ChatToTeacherServlet")
 public class ChatToTeacherServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

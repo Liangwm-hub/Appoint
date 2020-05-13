@@ -17,7 +17,7 @@ import java.io.PrintWriter;
  *
  * @author 梁伟民
  */
-@WebServlet(name = "UserRegisterServlet", urlPatterns = "/UserRegisterServlet")
+@WebServlet(name = "UserRegisterServlet", urlPatterns = "/user/UserRegisterServlet")
 public class UserRegisterServlet extends HttpServlet {
 
     @Override

@@ -15,7 +15,7 @@ import java.io.IOException;
  * 学生分页查询老师发布的预约
  * @author 梁伟民
  */
-@WebServlet(name = "FindReleaseByUserServlet", urlPatterns = "/FindReleaseByUserServlet")
+@WebServlet(name = "FindReleaseByUserServlet", urlPatterns = "/user/FindReleaseByUserServlet")
 public class FindReleaseByUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -46,7 +46,7 @@ public class FindReleaseByUserServlet extends HttpServlet {
         request.setAttribute("pb", pb);
 
         //4.转发到appoint.jsp
-        request.getRequestDispatcher("appoint.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/user/appoint.jsp").forward(request, response);
 
     }
 
