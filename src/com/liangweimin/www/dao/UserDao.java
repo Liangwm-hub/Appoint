@@ -35,34 +35,6 @@ public class UserDao implements IUserDao {
      */
     @Override
     public boolean login(User user) {
-//        Connection conn = null;
-//        PreparedStatement ps = null;
-//        ResultSet rs = null;
-//        try {
-//            conn = JDBCUtil.getConnection();
-//            System.out.println("############");
-//            System.out.println(conn);
-//            String sql = "select * from user where sno=? and password=? and status='注册成功'";
-//            ps = conn.prepareStatement(sql);
-//            ps.setInt(1, user.getSno());
-//            ps.setString(2, user.getPassword());
-//
-//            //返回一个结果集
-//            rs = ps.executeQuery();
-//
-//            if (rs.next()) {
-//                return true;
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return false;
-//        } finally {
-//            JDBCUtil.closeSource(conn, ps, rs);
-//        }
-//        return false;
-        System.out.println("%%%%%%%%%");
-        System.out.println(user.getSno());
-        System.out.println(user.getPassword());
         String sql = "select count(*) from user where sno=? and password=? and status=?";
         Integer count = template.queryForObject(sql, int.class, user.getSno(), user.getPassword(), "注册成功");
         System.out.println(count);
@@ -793,7 +765,7 @@ public class UserDao implements IUserDao {
                 String senderIdentity = rs.getString("sender_identity");
                 String createTime = rs.getString("create_time");
 
-                chatMessage = new ChatMessage(messageId, chatId, messageContent,messageType, teacherName, userName, senderIdentity, createTime);
+                chatMessage = new ChatMessage(messageId, chatId, messageContent, messageType, teacherName, userName, senderIdentity, createTime);
                 list.add(chatMessage);
             }
         } catch (Exception e) {
