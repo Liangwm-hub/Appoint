@@ -1,6 +1,6 @@
 ## 会面预约系统
 
-> >  **运行环境:** jdk 13  
+>  **运行环境:** jdk 13  
 >  **IDE环境：** IDEA  
 >  **tomcat环境：** Tomcat 8.5.51   
 >
@@ -26,7 +26,7 @@
 >
 >  **用到的技术：** java+jsp+mysql+servlet+html
 >
->  **前端框架**：bootstrap、jQuery
+>  **前端框架**：bootstrap
 >
 >  **github仓库**: https://github.com/Liangwm-hub/Appoint.git
 
