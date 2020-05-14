@@ -145,7 +145,6 @@
                 message = document.getElementById('picture');
                 messageContent = document.getElementById('picture');
                 isPicture = true;
-                alert(messageContent);
             });
 
             if (messageContent == null || messageContent === "") {
@@ -174,8 +173,6 @@
                         if (isPicture) {
                             var formData = new FormData();
                             formData.append("attrName", messageContent.files[0]);
-
-                            alert(messageContent);
 
                             $.ajax({
                                 type: "POST",

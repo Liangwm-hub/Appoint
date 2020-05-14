@@ -110,7 +110,7 @@ public class NoticeServlet extends HttpServlet {
                 }
 
                 if (success) {
-                    response.sendRedirect("QueryNoticeByManagerServlet");
+                    response.sendRedirect("FindAllNoticesByManagerServlet");
                 } else {
                     PrintWriter writer = response.getWriter();
                     writer.println("发布失败,请检查您的输入!");
