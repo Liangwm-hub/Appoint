@@ -59,12 +59,12 @@ public class TeacherLoginServlet extends HttpServlet {
                 request.getRequestDispatcher("FindReleaseByPageServlet").forward(request,response);
             } else {
                 //重新登录
-                response.sendRedirect("/view/teacher/teacherLogin.jsp");
+                response.sendRedirect(request.getContextPath()+"/view/teacher/teacherLogin.jsp");
             }
 
         } else {
             //验证码不正确
-            response.sendRedirect("/view/teacher/teacherLogin.jsp");
+            response.sendRedirect(request.getContextPath()+"/view/teacher/teacherLogin.jsp");
         }
     }
 }

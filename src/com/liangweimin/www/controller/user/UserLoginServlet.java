@@ -59,12 +59,12 @@ public class UserLoginServlet extends HttpServlet {
                 request.getRequestDispatcher("FindReleaseByUserServlet").forward(request,response);
             } else {
                 //重新登录
-                response.sendRedirect("/view/user/userLogin.jsp");
+                response.sendRedirect(request.getContextPath()+"/view/user/userLogin.jsp");
             }
 
         } else {
             //验证码不正确
-            response.sendRedirect("/view/user/userLogin.jsp");
+            response.sendRedirect(request.getContextPath()+"/view/user/userLogin.jsp");
         }
     }
 }

@@ -44,7 +44,7 @@ public class UserSetPasswordServlet extends HttpServlet {
             String password1 = request.getParameter("password1");
             String password2 = request.getParameter("password2");
 
-            if (password1 != null && password1.equals(password2)) {
+            if (password1 != null && !"".equals(password1) && password1.equals(password2)) {
 
                 //将密码进行加密
                 String encrypt = Md5Util.md5Encrypt(password1);
@@ -54,10 +54,12 @@ public class UserSetPasswordServlet extends HttpServlet {
                 //调用service层的方法
                 UserService userService = new UserService();
                 boolean success = userService.setPassword(user);
+                System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@");
+                System.out.println(success);
 
                 //注册请求成功
                 if (success) {
-                    response.sendRedirect("/view/user/userLogin.jsp");
+                    response.sendRedirect(request.getContextPath()+"/view/user/userLogin.jsp");
                 } else {
                     writer.println("修改失败，请检查您的输入！");
                 }

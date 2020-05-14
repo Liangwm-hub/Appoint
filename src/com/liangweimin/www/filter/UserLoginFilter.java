@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * @author 梁伟民
  */
-@WebFilter(filterName = "UserLoginFilter",value ={"/view/user/*","/user/*"})
+@WebFilter(filterName = "UserLoginFilter", value = {"/view/user/*", "/user/*"})
 public class UserLoginFilter implements Filter {
     @Override
     public void destroy() {
@@ -29,7 +29,7 @@ public class UserLoginFilter implements Filter {
         if (uri.contains("/userLogin.jsp") || uri.contains("/UserLoginServlet") || uri.contains("/css/") ||
                 uri.contains("/js/") || uri.contains("/font/") || uri.contains("/img.jsp") ||
                 uri.contains("/index.jsp") || "/Appoint__war_exploded/".equals(uri) || uri.contains("/set_password.jsp") ||
-                uri.contains("UserRegisterServlet") || uri.contains("userRegister.jsp")) {
+                uri.contains("/UserSetPasswordServlet") || uri.contains("/UserRegisterServlet") || uri.contains("/userRegister.jsp")) {
             //包含,就是想登录,放行
             chain.doFilter(req, resp);
         } else {
@@ -48,7 +48,7 @@ public class UserLoginFilter implements Filter {
                 chain.doFilter(req, resp);
             } else {
                 //没有登录,则跳转登录页面
-                response.sendRedirect(request.getContextPath()+"/index.jsp");
+                response.sendRedirect(request.getContextPath() + "/index.jsp");
             }
         }
     }

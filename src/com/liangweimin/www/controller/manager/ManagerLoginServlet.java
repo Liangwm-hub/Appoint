@@ -14,13 +14,14 @@ import java.io.IOException;
 
 /**
  * 管理员登录
+ *
  * @author 梁伟民
  */
-@WebServlet(name = "ManagerLoginServlet",urlPatterns = "/manager/ManagerLoginServlet")
+@WebServlet(name = "ManagerLoginServlet", urlPatterns = "/manager/ManagerLoginServlet")
 public class ManagerLoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request,response);
+        doGet(request, response);
     }
 
     @Override
@@ -53,18 +54,18 @@ public class ManagerLoginServlet extends HttpServlet {
             if (success) {
                 //把managerId存进session
                 HttpSession session = request.getSession();
-                session.setAttribute("managerId",managerId);
+                session.setAttribute("managerId", managerId);
 
                 //转发到显示预约界面的servlet
                 response.sendRedirect("AllRequestsServlet");
             } else {
                 //重新登录
-                response.sendRedirect("/view/manager/managerLogin.jsp");
+                response.sendRedirect(request.getContextPath() + "/view/manager/managerLogin.jsp");
             }
 
         } else {
             //验证码不正确
-            response.sendRedirect("/view/manager/managerLogin.jsp");
+            response.sendRedirect(request.getContextPath() + "/view/manager/managerLogin.jsp");
         }
     }
 }

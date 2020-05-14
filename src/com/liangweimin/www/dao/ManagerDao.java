@@ -292,7 +292,7 @@ public class ManagerDao implements IManagerDao {
         PreparedStatement ps = null;
         try {
             conn = JDBCUtil.getConnection();
-            String sql = "update `user` set status='注册失败' where sno=?";
+            String sql = "delete from `user` where sno=?";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, sno);
 

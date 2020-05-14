@@ -48,7 +48,7 @@ public class UserRegisterServlet extends HttpServlet {
             String password1 = request.getParameter("password1");
             String password2 = request.getParameter("password2");
 
-            if (name != null && password1 != null && password1.equals(password2)) {
+            if (name != null && password1 != null && !"".equals(name) && !"".equals(password1) && password1.equals(password2)) {
 
                 //将密码进行加密
                 String encrypt = Md5Util.md5Encrypt(password1);
