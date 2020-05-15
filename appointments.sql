@@ -181,3 +181,43 @@ FROM
     notice;
 
 
+
+-- -----------------------
+-- 聊天列表 
+-- -----------------------
+
+CREATE TABLE chat_room (
+    chat_id INT PRIMARY KEY AUTO_INCREMENT COMMENT '聊天的编号',
+    teacher_id INT COMMENT '导师的编号',
+    teacher_name VARCHAR(20) NOT NULL COMMENT '导师名字',
+    user_sno INT COMMENT '学生学号',
+    user_name VARCHAR(20) NOT NULL COMMENT '学生名字'
+);
+
+insert into chat_room values(2,9001,'老梁',1001,'阿兰');
+select * from chat_room;
+
+-- ----------------------
+-- 聊天信息
+-- ----------------------
+
+CREATE TABLE chat_message (
+    message_id INT PRIMARY KEY AUTO_INCREMENT COMMENT '信息编号',
+    chat_id INT COMMENT '聊天编号',
+    message_content VARCHAR(100) COMMENT '信息内容',
+    message_type enum('文字','图片'),
+    teacher_name VARCHAR(20) NOT NULL COMMENT '导师名字',
+    user_name VARCHAR(20) NOT NULL COMMENT '学生名字',
+    sender_identity ENUM('导师', '学生') COMMENT '发送人的身份',
+    create_time DATETIME COMMENT '发送的时间'
+);
+
+select * from chat_message;
+delete from chat_message;
+
+insert into chat_message values(19,15,'2020050722033091829.jpg','图片','老王','阿翔','导师',now());
+insert into chat_message values(2,3,'同学你好啊','老王','阿翔','导师',now());
+
+SELECT COUNT(*) FROM `chat_message` WHERE `message_id`>'1';
+
+drop table chat_message;
